@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+    <style>
+        .center{
+            padding-left: 650px
+        }
+        .pad{
+            padding-left: 200px;
+            padding-right: 200px
+        }
+    </style>
+    <title>Результаты класса</title>
+</head>
+<body>
+<header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" href="#">ЕГЭ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Математика</a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link" href="#">Информатика</a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Профиль</button>
+    </form>
+  </div>
+</nav>
+    <h1 class="display-4" align=center>Здравствуйте, {{name}}!</h1>
+    <br>
+        <div class="btn-group center" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary">Математика</button>
+  <button type="button" class="btn btn-secondary active">Информатика</button>
+        <br>
+</div>
+    <div class="pad">
+    <h3>Класс:</h3>
+          <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Логин</th>
+      <th scope="col">Средняя успеваемость</th>
+      <th scope="col">Профиль</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>54%</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>98%</td>
+      <td>@zxcv</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>34%</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+  <button type="button" class="btn btn-secondary btn-lg btn-block">Добавить ученика</button>
+<br> <br> <br>
+</header>
+</body>
+</html>
