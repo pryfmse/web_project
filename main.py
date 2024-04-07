@@ -6,9 +6,23 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 @app.route('/')
-@app.route('/index')
 def index():
     return render_template('main.html')
+
+
+@app.route('/reg_user')
+def reg_user():
+    return render_template('reg_user.html')
+
+
+@app.route('/reg_admin')
+def reg_admin():
+    return render_template('reg_admin.html')
+
+
+@app.route('/enter')
+def enter():
+    return render_template('enter.html')
 
 
 def main():
