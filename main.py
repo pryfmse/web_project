@@ -52,12 +52,12 @@ def enter():
         return res_user(request.form['login'])
 
 
-@app.route('/res_user/<str:name>')
+@app.route('/res_user')
 def res_user(name):
     return render_template('result_user.html', name=name)
 
 
-@app.route('/res_admin/<str:name>')
+@app.route('/res_admin')
 def res_admin(name):
     return render_template('res_admin.html', name=name)
 
