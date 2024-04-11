@@ -62,6 +62,16 @@ def res_admin(name):
     return render_template('res_admin.html', name=name)
 
 
+@app.route('/math_main')
+def math_main():
+    return render_template('math_main.html')
+
+
+@app.route('/inf_main')
+def inf_main():
+    return render_template('inf_main.html')
+
+
 def main():
     db_session.global_init("db/data.db")
     app.run()
