@@ -27,26 +27,25 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Математика</a>
+        <a class="nav-link" href="/math_main">Математика</a>
       </li>
             <li class="nav-item">
-        <a class="nav-link" href="#">Информатика</a>
+        <a class="nav-link" href="/inf_main">Информатика</a>
       </li>
     </ul>
     <form class="form-inline mt-2 mt-md-0">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Вход</button>
+      <a class="btn btn-outline-light my-2 my-sm-0" href="enter" type="submit">Вход</a>
     </form>
   </div>
 </nav>
     <br>
     <h1 class="display-4" align=center>Регистрация</h1>
-    <div class="btn-group center" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Пользователю</button>
-  <button type="button" class="btn btn-secondary active">Администратору</button>
-        <br>
+    <div style="text-align:center">
+  <a type="button" href="/reg_user" class="btn btn-secondary">Пользователю</a>
+  <a type="button" href="/reg_admin" class="btn btn-secondary active">Администратору</a>
 </div>
         <form class='pad' method="post">
   <div class="form-group">
@@ -59,7 +58,7 @@
   </div>
   <button type="submit" class="btn btn-primary btn-lg btn-block">Зарегистрироваться</button>
             <br>
-<button type="button" class="btn btn-secondary btn-lg btn-block">Вход</button>
+<a type="button" href="/enter" class="btn btn-secondary btn-lg btn-block">Вход</a>
 </form>
 </header>
 </body>

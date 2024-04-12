@@ -44,7 +44,7 @@ def enter():
     elif request.method == 'POST':
         print(request.form['login'])
         print(request.form['password'])
-        return res_user(request.form['login'])
+        return redirect('/inf_main')
 
 
 @app.route('/res_user/<name>')
