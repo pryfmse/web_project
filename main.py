@@ -1,5 +1,5 @@
 from data import db_session
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -14,30 +14,25 @@ def index():
 def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
-    elif request.method == 'POST':
-        print(request.form['email'])
-        print(request.form['password'])
-        print(request.form['class'])
-        print(request.form['file'])
-        print(request.form['about'])
-        print(request.form['accept'])
-        print(request.form['sex'])
-        f = request.files['file']
-        print(f.read())
-        return "Форма отправлена"
+    elif request.method == 'POST':  # добавлять фото, логин и пароль в базу данных. Открывать страницу профиля
+        name = request.form['login']
+        password = request.form['password']
+        # if request.files['photo']:
+        #     picture = request.files['photo']
+        return redirect(f'/res_user/{name}')
 
 
 @app.route('/reg_admin', methods=['POST', 'GET'])
 def reg_admin():
     if request.method == 'GET':
         return render_template('reg_admin.html')
-    elif request.method == 'POST':
+    elif request.method == 'POST':  # добавлять фото, логин и пароль в базу данных. Открывать страницу профиля
         if request.form['key'] == app.config['SECRET_KEY']:
-            print(request.form['login'])
-            print(request.form['password'])
-            f = request.files['file']
-            print(f.read())
-            return "Форма отправлена"
+            name = request.form['login']
+            password = request.form['password']
+            if request.files['file']:
+                picture = request.form['file']
+            return redirect(f'/res_admin/{name}')
         else:
             return 'Неверный ключ'
 
@@ -52,7 +47,7 @@ def enter():
         return res_user(request.form['login'])
 
 
-@app.route('/res_user')
+@app.route('/res_user/<name>')
 def res_user(name):
     return render_template('result_user.html', name=name)
 
