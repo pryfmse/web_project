@@ -47,19 +47,19 @@
   <a type="button" href="/reg_user" class="btn btn-secondary">Пользователю</a>
   <a type="button" href="/reg_admin" class="btn btn-secondary active">Администратору</a>
 </div>
-        <form class='pad' method="post">
+        <form class='pad' method="post" enctype="multipart/form-data">
   <div class="form-group">
       <br>
     <input class="form-control" name="login" placeholder="Логин">
     <input type="password" class="form-control" name="password" placeholder="Пароль">
     <input type="password" class="form-control" name="key" placeholder="Ключ">
     <label for="exampleFormControlFile1">Выберите фото профиля</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo">
   </div>
   <button type="submit" class="btn btn-primary btn-lg btn-block">Зарегистрироваться</button>
             <br>
 <a type="button" href="/enter" class="btn btn-secondary btn-lg btn-block">Вход</a>
-</form>
+        </form>
 </header>
 </body>
 </html>
