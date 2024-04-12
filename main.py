@@ -1,6 +1,6 @@
 from data import db_session
 from flask import Flask, render_template, request, redirect
-from data.users import Reg
+# from data.users import Reg
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -16,16 +16,16 @@ def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
     elif request.method == 'POST':  # добавлять фото, логин и пароль в базу данных. Открывать страницу профиля
-        session = db_session.create_session()
-        user = Reg()
-        user.login = request.form['login']
-        user.password = request.form['password']
-
-        session.add(user)
-        session.commit()
+        # session = db_session.create_session()
+        # user = Reg()
+        # user.login = request.form['login']
+        # user.password = request.form['password']
+        #
+        # session.add(user)
+        # session.commit()
         if request.files['photo']:
             picture = request.files['photo']
-        return redirect(f'/res_user/{request.form["login"]}')
+        return redirect(f'/res_user_inf/{request.form["login"]}')
 
 
 @app.route('/reg_admin', methods=['POST', 'GET'])
@@ -53,9 +53,14 @@ def enter():
         return redirect('/inf_main')
 
 
-@app.route('/res_user/<name>')
-def res_user(name):
-    return render_template('result_user.html', name=name)
+@app.route('/res_user_inf/<name>')
+def res_user_inf(name):
+    return render_template('res_user_inf.html', name=name)
+
+
+@app.route('/res_user_math/<name>')
+def res_user_math(name):
+    return render_template('res_user_math.html', name=name)
 
 
 @app.route('/res_admin/<name>')

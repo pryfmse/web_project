@@ -6,12 +6,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .db_session import SqlAlchemyBase
 
 
-class Reg(SqlAlchemyBase):
-    __tablename__ = 'зарегистрированы'
-
-    login = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    password = sqlalchemy.Column(nullable=True)
-    status = sqlalchemy.Column(sqlalchemy.String)
+# class Reg(SqlAlchemyBase):
+#     __tablename__ = 'зарегистрированы'
+#
+#     login = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+#     password = sqlalchemy.Column(nullable=True)
+#     status = sqlalchemy.Column(sqlalchemy.String)
 
 
 # class User(SqlAlchemyBase):
