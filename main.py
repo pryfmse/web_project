@@ -21,8 +21,6 @@ def reg_user():
         user.login = request.form['login']
         user.password = request.form['password']
         user.status = 'user'
-        if request.files['photo']:
-            picture = request.files['photo']
 
         session.add(user)
         session.commit()
@@ -40,8 +38,6 @@ def reg_admin():
             user.login = request.form['login']
             user.password = request.form['password']
             user.status = 'admin'
-            if request.files['photo']:
-                picture = request.files['photo']
 
             session.add(user)
             session.commit()

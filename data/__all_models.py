@@ -9,7 +9,6 @@ class Reg(SqlAlchemyBase):
     login = sqlalchemy.Column(sqlalchemy.String, primary_key=True, nullable=False, unique=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     status = sqlalchemy.Column(sqlalchemy.String, nullable=False)
-    photo = sqlalchemy.Column(sqlalchemy.LargeBinary)
 
 
 class MathTasks(SqlAlchemyBase):
