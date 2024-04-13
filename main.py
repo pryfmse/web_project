@@ -15,7 +15,7 @@ def index():
 def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
-    elif request.method == 'POST':  # добавлять фото
+    elif request.method == 'POST':
         session = db_session.create_session()
         user = __all_models.Reg()
         user.login = request.form['login']
@@ -31,7 +31,7 @@ def reg_user():
 def reg_admin():
     if request.method == 'GET':
         return render_template('reg_admin.html')
-    elif request.method == 'POST':  # добавлять фото в базу данных
+    elif request.method == 'POST':
         if request.form['key'] == app.config['SECRET_KEY']:
             session = db_session.create_session()
             user = __all_models.Reg()
@@ -68,9 +68,14 @@ def res_user_math(name):
     return render_template('res_user_math.html', name=name)
 
 
-@app.route('/res_admin/<name>')
-def res_admin(name):
-    return render_template('res_admin.html', name=name)
+@app.route('/res_admin_math/<name>')
+def res_admin1(name):
+    return render_template('res_admin_math.html', name=name)
+
+
+@app.route('/res_admin_inf/<name>')
+def res_admin2(name):
+    return render_template('res_admin_inf.html', name=name)
 
 
 @app.route('/math_main')
