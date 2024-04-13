@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script type="text/javascript">
+ google.charts.load('current', {'packages':['corechart']});
+ google.charts.setOnLoadCallback(drawChart);
+ function drawChart() {
+ const data = google.visualization.arrayToDataTable([
+ ['Task', 'Средний показатель в процентах'],
+ ['1', 100],
+ ['2', 11],
+ ['3', 66],
+ ['4', 10],
+ ['5', 100],
+ ['6', 11],
+ ['7', 66],
+ ['8', 100],
+ ['9', 11],
+ ['10', 66],
+ ['11', 100],
+ ['12', 11],
+ ['13', 66],
+ ['14', 100],
+ ['15', 11],
+ ['16', 66],
+ ['17', 100],
+ ['18', 11],
+ ['19', 66],
+ ['20', 100],
+ ['21', 11],
+ ['22', 66],
+ ['23', 100],
+ ['24', 11],
+ ['25', 66],
+ ['26a', 100],
+ ['26b', 11],
+ ['27a', 66],
+ ['27b', 9]
+ ]);
+ const options = {
+ title: 'Успеваемость',
+ curveType: 'function',
+ legend: { position: 'bottom' }
+ };
+ const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+ chart.draw(data, options);
+ }
+ </script>
+     <style>
+        .center{
+            padding-left: 650px
+        }
+        .pad{
+            padding-left: 200px;
+            padding-right: 200px
+        }
+    </style>
+    <title>Результаты класса</title>
+</head>
+<body>
+     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <a class="navbar-brand" href="#">ЕГЭ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/math_main">Математика</a>
+      </li>
+            <li class="nav-item">
+        <a class="nav-link" href="/inf_main">Информатика</a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <a class="btn btn-outline-light my-2 my-sm-0" type="submit">Профиль</a>
+    </form>
+  </div>
+</nav>
+    <h1 class="display-4" align=center>Здравствуйте, {{name}}!</h1>
+    <br>
+    <div style="text-align:center">
+  <a type="button" href="/res_admin_math/a" class="btn btn-secondary active">Математика</a>
+  <a type="button" href="/res_admin_inf/a" class="btn btn-secondary">Информатика</a>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Запустите демо модального окна
+</button>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Заголовок модального окна</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-primary">Сохранить изменения</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    <div class="pad">
+    <h3>Класс:</h3>
+          <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Логин</th>
+      <th scope="col">Средняя успеваемость</th>
+      <th scope="col">Профиль</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>54%</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>98%</td>
+      <td>@zxcv</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>34%</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  <button type="button" class="btn btn-secondary btn-lg btn-block">Добавить ученика</button>
+<br> <br> <br>
+ <div id="curve_chart" style="width: 100%; height: 500px"></div>
+</body>
+    <div class="b-example-divider"></div>
+
+<div class="container">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
+  </footer>
+</div>
+</html>
