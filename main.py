@@ -1,6 +1,6 @@
 from data import db_session
 from flask import Flask, render_template, request, redirect
-# from data.users import Reg
+from data import __all_models
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -15,16 +15,17 @@ def index():
 def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
-    elif request.method == 'POST':  # добавлять фото, логин и пароль в базу данных. Открывать страницу профиля
-        # session = db_session.create_session()
-        # user = Reg()
-        # user.login = request.form['login']
-        # user.password = request.form['password']
-        #
-        # session.add(user)
-        # session.commit()
+    elif request.method == 'POST':  # добавлять фото
+        session = db_session.create_session()
+        user = __all_models.Reg()
+        user.login = request.form['login']
+        user.password = request.form['password']
+        user.status = 'user'
         if request.files['photo']:
             picture = request.files['photo']
+
+        session.add(user)
+        session.commit()
         return redirect(f'/res_user_inf/{request.form["login"]}')
 
 
@@ -32,15 +33,21 @@ def reg_user():
 def reg_admin():
     if request.method == 'GET':
         return render_template('reg_admin.html')
-    elif request.method == 'POST':  # добавлять фото, логин и пароль в базу данных. Открывать страницу профиля
+    elif request.method == 'POST':  # добавлять фото в базу данных
         if request.form['key'] == app.config['SECRET_KEY']:
-            name = request.form['login']
-            password = request.form['password']
+            session = db_session.create_session()
+            user = __all_models.Reg()
+            user.login = request.form['login']
+            user.password = request.form['password']
+            user.status = 'admin'
             if request.files['photo']:
-                picture = request.form['photo']
-            return redirect(f'/res_admin/{name}')
+                picture = request.files['photo']
+
+            session.add(user)
+            session.commit()
+            return redirect(f'/res_admin/{request.form["login"]}')
         else:
-            return 'Неверный ключ'
+            return 'Неверный ключ'  # всплывающее окно
 
 
 @app.route('/enter', methods=['POST', 'GET'])
@@ -48,9 +55,11 @@ def enter():
     if request.method == 'GET':
         return render_template('enter.html')
     elif request.method == 'POST':
-        print(request.form['login'])
-        print(request.form['password'])
-        return redirect('/inf_main')
+        session = db_session.create_session()
+        for i in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'], __all_models.Reg.password == request.form['password']):
+            return redirect('/inf_main')
+        else:
+            return 'Не удаётся войти'  # всплывающее окно
 
 
 @app.route('/res_user_inf/<name>')

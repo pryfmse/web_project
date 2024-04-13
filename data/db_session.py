@@ -24,7 +24,7 @@ def global_init(db_file):
     __factory = orm.sessionmaker(bind=engine)
 
     # noinspection PyUnresolvedReferences
-    from . import users
+    from . import __all_models
 
     SqlAlchemyBase.metadata.create_all(engine)
 
