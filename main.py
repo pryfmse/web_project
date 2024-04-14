@@ -17,6 +17,9 @@ def reg_user():
         return render_template('reg_user.html')
     elif request.method == 'POST':
         session = db_session.create_session()
+        for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
+            return render_template('reg_user.html', mess='Этот пользователь уже зарегистрирован')
+        session = db_session.create_session()
         user = __all_models.Reg()
         user.login = request.form['login']
         user.password = request.form['password']
@@ -34,6 +37,9 @@ def reg_admin(mess=False):
     elif request.method == 'POST':
         if request.form['key'] == app.config['SECRET_KEY']:
             session = db_session.create_session()
+            for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
+                return render_template('reg_admin.html', mess='Этот пользователь уже зарегистрирован')
+            session = db_session.create_session()
             user = __all_models.Reg()
             user.login = request.form['login']
             user.password = request.form['password']
@@ -41,7 +47,7 @@ def reg_admin(mess=False):
 
             session.add(user)
             session.commit()
-            return redirect(f'/res_admin/{request.form["login"]}')
+            return redirect(f'/res_admin_inf/{request.form["login"]}')
         else:
             return render_template('reg_admin.html', mess='Неверный ключ')
 
@@ -52,7 +58,7 @@ def enter(mess=False):
         return render_template('enter.html', mess=mess)
     elif request.method == 'POST':
         session = db_session.create_session()
-        for i in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
+        for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
                                                         __all_models.Reg.password == request.form['password']):
             return redirect('/inf_main')
         else:
