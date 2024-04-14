@@ -28,9 +28,9 @@ def reg_user():
 
 
 @app.route('/reg_admin', methods=['POST', 'GET'])
-def reg_admin():
+def reg_admin(mess=False):
     if request.method == 'GET':
-        return render_template('reg_admin.html')
+        return render_template('reg_admin.html', mess=mess)
     elif request.method == 'POST':
         if request.form['key'] == app.config['SECRET_KEY']:
             session = db_session.create_session()
@@ -43,19 +43,19 @@ def reg_admin():
             session.commit()
             return redirect(f'/res_admin/{request.form["login"]}')
         else:
-            return 'Неверный ключ'  # всплывающее окно
+            return render_template('reg_admin.html', mess='Неверный ключ')
 
 
 @app.route('/enter', methods=['POST', 'GET'])
-def enter():
+def enter(mess=False):
     if request.method == 'GET':
-        return render_template('enter.html')
+        return render_template('enter.html', mess=mess)
     elif request.method == 'POST':
         session = db_session.create_session()
         for i in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'], __all_models.Reg.password == request.form['password']):
             return redirect('/inf_main')
         else:
-            return 'Не удаётся войти'  # всплывающее окно
+            return render_template('enter.html', mess='Не удалось войти')
 
 
 @app.route('/res_user_inf/<name>')

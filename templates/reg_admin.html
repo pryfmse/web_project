@@ -57,6 +57,9 @@
   <button type="submit" class="btn btn-primary btn-lg btn-block">Зарегистрироваться</button>
             <br>
 <a type="button" href="/enter" class="btn btn-secondary btn-lg btn-block">Вход</a>
+                                 {% if mess %}
+        <br><div class="alert alert-dark" role="alert"> {{mess}} </div>
+    {% endif %}
         </form>
 </header>
 </body> <br><br>

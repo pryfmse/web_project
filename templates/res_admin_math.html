@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
  <script type="text/javascript">
  google.charts.load('current', {'packages':['corechart']});
@@ -91,28 +94,30 @@
     <div style="text-align:center">
   <a type="button" href="/res_admin_math/a" class="btn btn-secondary active">Математика</a>
   <a type="button" href="/res_admin_inf/a" class="btn btn-secondary">Информатика</a>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Запустите демо модального окна
-</button>
+<div class="modal fade" id="myModal" role="dialog">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h4 class="modal-title">Добавить задание</h4>
+ </div>
+ <div class="modal-body"><form enctype="multipart/form-data" method="post">
+    <input class="form-control" name="number" placeholder="Номер задания">
+    <input class="form-control" name="text" placeholder="Текст задания"><br>
+     <label>Картинка для задания(опционально)</label>
+    <input type="file" name="f"><br>
+     <label>Файлы для задания(опционально)</label>
+     <input type="file" name="f">
+     <input type="file" name="f"><br>
+    <input class="form-control" name="answer" placeholder="Ответ">
+ </form> </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-secondary" data-dismiss="modal">Добавить</button>
+ </div>
+ </div>
+ </div>
+ </div>
 
-<!-- Модальное окно -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Заголовок модального окна</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-primary">Сохранить изменения</button>
-      </div>
-    </div>
-  </div>
-</div>
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Добавить задание</button>
     </div>
     <div class="pad">
     <h3>Класс:</h3>
