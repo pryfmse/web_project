@@ -52,7 +52,8 @@ def enter(mess=False):
         return render_template('enter.html', mess=mess)
     elif request.method == 'POST':
         session = db_session.create_session()
-        for i in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'], __all_models.Reg.password == request.form['password']):
+        for i in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
+                                                        __all_models.Reg.password == request.form['password']):
             return redirect('/inf_main')
         else:
             return render_template('enter.html', mess='Не удалось войти')

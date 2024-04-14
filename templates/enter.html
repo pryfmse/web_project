@@ -14,60 +14,64 @@
         .center{
             padding-left: 660px
         }
+
     </style>
     <title>Вход</title>
 </head>
 <body>
 <header>
- <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-  <a class="navbar-brand" href="#">ЕГЭ</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/math_main">Математика</a>
-      </li>
-            <li class="nav-item">
-        <a class="nav-link" href="/inf_main">Информатика</a>
-      </li>
-    </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      <a class="btn btn-outline-light my-2 my-sm-0" href="/enter" type="submit">Вход</a>
-    </form>
-  </div>
-</nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">ЕГЭ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/math_main">Математика</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/inf_main">Информатика</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <a class="btn btn-outline-light my-2 my-sm-0" href="/enter" type="submit">Вход</a>
+            </form>
+        </div>
+    </nav>
     <br>
     <h1 class="display-4" align=center>Вход</h1>
-        <form class='pad' method="post">
-  <div class="form-group">
-      <br>
-    <input class="form-control" id="login" name="login" placeholder="Логин">
-    <input type="password" class="form-control" name="password" id="password" placeholder="Пароль">
-      <br></div>
-  <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
+    <form class='pad' method="post">
+        <div class="form-group">
+            <br>
+            <input class="form-control" id="login" name="login" placeholder="Логин">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Пароль">
+            <br></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
 
-<a type="button" href="/reg_user" class="btn btn-secondary btn-lg btn-block">Регистрация</a>
-                 {% if mess %}
-        <br><div class="alert alert-dark" role="alert"> {{mess}} </div>
-    {% endif %}
-</form>
+        <a type="button" href="/reg_user" class="btn btn-secondary btn-lg btn-block">Регистрация</a>
+        {% if mess %}
+        <br>
+        <div class="alert alert-dark" role="alert"> {{mess}}</div>
+        {% endif %}
+    </form>
 </header>
-</body><br><br><br><br><br><br><br><br>
-    <div class="b-example-divider"></div>
+</body>
+<br><br><br><br><br><br><br><br>
+<div class="b-example-divider"></div>
 
 <div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
-  </footer>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
+        </ul>
+        <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
+    </footer>
 </div>
 </html>
