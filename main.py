@@ -39,7 +39,6 @@ def reg_admin(mess=False):
             session = db_session.create_session()
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
                 return render_template('reg_admin.html', mess='Этот пользователь уже зарегистрирован')
-            session = db_session.create_session()
             user = __all_models.Reg()
             user.login = request.form['login']
             user.password = request.form['password']
@@ -75,14 +74,48 @@ def res_user_math(name):
     return render_template('res_user_math.html', name=name)
 
 
-@app.route('/res_admin_math/<name>')
+@app.route('/res_admin_math/<name>', methods=['POST', 'GET'])
 def res_admin1(name):
-    return render_template('res_admin_math.html', name=name)
+    if request.method == 'GET':
+        return render_template('res_admin_math.html', name=name)
+    elif request.method == 'POST':
+        session = db_session.create_session()
+        task = __all_models.MathTasks()
+        task.number = request.form['number']
+        task.task_text = request.form['text']
+        f = request.files['picture']
+        print(f.read())
+        if request.form['picture']:
+            with open(request.files['picture'], 'rb') as file:
+                task.task_picture = file.read()
+        task.answer = request.form['answer']
+        session.add(task)
+        session.commit()
+        return render_template('res_admin_math.html', name=name)
 
 
 @app.route('/res_admin_inf/<name>')
 def res_admin2(name):
-    return render_template('res_admin_inf.html', name=name)
+    if request.method == 'GET':
+        return render_template('res_admin_inf.html', name=name)
+    elif request.method == 'POST':
+        session = db_session.create_session()
+        task = __all_models.InfTasks()
+        task.number = request.form['number']
+        task.task_text = request.form['text']
+        if request.form['picture']:
+            with open(request.form['picture'], 'rb') as file:
+                task.task_picture = file.read()
+        if request.form['file']:
+            with open(request.form['file'], 'rb') as f:
+                task.file = f.read()
+        if request.form['file2']:
+            with open(request.form['file2'], 'rb') as f:
+                task.file2 = f.read()
+        task.answer = request.form['answer']
+        session.add(task)
+        session.commit()
+        return render_template('res_admin_inf.html', name=name)
 
 
 @app.route('/math_main')
@@ -102,3 +135,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+#             with open('data.png', 'wb') as file:
+#                 file.write(self.foto[0])

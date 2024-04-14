@@ -52,6 +52,7 @@
  chart.draw(data, options);
  }
 
+
     </script>
     <style>
         .center{
@@ -61,6 +62,7 @@
             padding-left: 200px;
             padding-right: 200px
         }
+
 
     </style>
     <title>Результаты класса</title>
@@ -94,8 +96,35 @@
 <div style="text-align:center">
     <a type="button" href="/res_admin_math/a" class="btn btn-secondary">Математика</a>
     <a type="button" href="/res_admin_inf/a" class="btn btn-secondary active">Информатика</a>
-    <a class="btn btn-secondary rounded-pill px-3" type="button">Добавить задание</a>
+    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-info">Добавить задание
+    </button>
 
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+              title="Закрыть модальное окно">×</span>
+        <form class="modal-content" method="post">
+            <div class="container">
+                <h1>Добавить новое задание в базу информатики</h1>
+                <hr>
+                        <div class="form-group">
+                            <input class="form-control" name="number" placeholder="Номер задания">
+                            <input class="form-control" name="text" placeholder="Текст задания"><br>
+                            <label>Картинка для задания(опционально)</label><br>
+                            <input type="file" name="picture"><br>
+                            <label>Файлы для задания(опционально)</label><br>
+                            <input type="file" name="file"><br>
+                            <input type="file" name="file2"><br>
+                            <input class="form-control" name="answer" placeholder="Ответ">
+                        </div>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn btn btn-secondary">Отменить
+                    </button>
+                    <button type="submit" class="signupbtn btn-dark btn">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <div class="pad">
     <h3>Класс:</h3>

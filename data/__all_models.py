@@ -16,6 +16,7 @@ class MathTasks(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
+    number = sqlalchemy.Column(sqlalchemy.Integer)
     task_text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     task_picture = sqlalchemy.Column(sqlalchemy.LargeBinary)
     answer = sqlalchemy.Column(sqlalchemy.String, nullable=False)
@@ -26,9 +27,11 @@ class InfTasks(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
+    number = sqlalchemy.Column(sqlalchemy.Integer)
     task_text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     task_picture = sqlalchemy.Column(sqlalchemy.LargeBinary)
     file = sqlalchemy.Column(sqlalchemy.LargeBinary)
+    file2 = sqlalchemy.Column(sqlalchemy.LargeBinary)
     answer = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
 

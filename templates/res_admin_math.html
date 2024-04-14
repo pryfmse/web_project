@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
  google.charts.load('current', {'packages':['corechart']});
@@ -54,8 +51,6 @@
  const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
  chart.draw(data, options);
  }
-
-
     </script>
     <style>
         .center{
@@ -99,33 +94,34 @@
 <div style="text-align:center">
     <a type="button" href="/res_admin_math/a" class="btn btn-secondary active">Математика</a>
     <a type="button" href="/res_admin_inf/a" class="btn btn-secondary">Информатика</a>
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Добавить задание</h4>
+    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-info">Добавить задание
+    </button>
+
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+              title="Закрыть модальное окно">×</span>
+        <form class="modal-content" method="post">
+            <div class="container">
+                <h1>Добавить новое задание в базу математики</h1>
+                <hr>
+                <div class="form-group">
+                    <input class="form-control" name="number" placeholder="Номер задания">
+                    <input class="form-control" name="text" placeholder="Текст задания"><br>
+                    <label>Картинка для задания(опционально)</label><br>
+                    <input type="file" name="picture"><br>
+                    <input class="form-control" name="answer" placeholder="Ответ">
                 </div>
-                <div class="modal-body">
-                    <form enctype="multipart/form-data" method="post">
-                        <input class="form-control" name="number" placeholder="Номер задания">
-                        <input class="form-control" name="text" placeholder="Текст задания"><br>
-                        <label>Картинка для задания(опционально)</label>
-                        <input type="file" name="f"><br>
-                        <label>Файлы для задания(опционально)</label>
-                        <input type="file" name="f">
-                        <input type="file" name="f"><br>
-                        <input class="form-control" name="answer" placeholder="Ответ">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Добавить</button>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                            class="cancelbtn btn btn-secondary">Отменить
+                    </button>
+                    <button type="submit" class="signupbtn btn-dark btn">Добавить</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Добавить задание</button>
 </div>
+
 <div class="pad">
     <h3>Класс:</h3>
     <table class="table">
