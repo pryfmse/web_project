@@ -100,7 +100,7 @@
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
               title="Закрыть модальное окно">×</span>
-        <form class="modal-content" method="post">
+        <form class="modal-content" method="post" enctype="multipart/form-data">
             <div class="container">
                 <h1>Добавить новое задание в базу математики</h1>
                 <hr>
@@ -108,7 +108,7 @@
                     <input class="form-control" name="number" placeholder="Номер задания">
                     <input class="form-control" name="text" placeholder="Текст задания"><br>
                     <label>Картинка для задания(опционально)</label><br>
-                    <input type="file" name="picture"><br>
+                    <input type="file" class="form-control-file" name="picture"><br>
                     <input class="form-control" name="answer" placeholder="Ответ">
                 </div>
                 <div class="clearfix">

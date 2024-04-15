@@ -8,49 +8,49 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
- google.charts.load('current', {'packages':['corechart']});
- google.charts.setOnLoadCallback(drawChart);
- function drawChart() {
- const data = google.visualization.arrayToDataTable([
- ['Task', 'Средний показатель в процентах'],
- ['1', 100],
- ['2', 11],
- ['3', 66],
- ['4', 10],
- ['5', 100],
- ['6', 11],
- ['7', 66],
- ['8', 100],
- ['9', 11],
- ['10', 66],
- ['11', 100],
- ['12', 11],
- ['13', 66],
- ['14', 100],
- ['15', 11],
- ['16', 66],
- ['17', 100],
- ['18', 11],
- ['19', 66],
- ['20', 100],
- ['21', 11],
- ['22', 66],
- ['23', 100],
- ['24', 11],
- ['25', 66],
- ['26a', 100],
- ['26b', 11],
- ['27a', 66],
- ['27b', 9]
- ]);
- const options = {
- title: 'Успеваемость',
- curveType: 'function',
- legend: { position: 'bottom' }
- };
- const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
- chart.draw(data, options);
- }
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+        const data = google.visualization.arrayToDataTable([
+        ['Task', 'Средний показатель в процентах'],
+        ['1', 100],
+        ['2', 11],
+        ['3', 66],
+        ['4', 10],
+        ['5', 100],
+        ['6', 11],
+        ['7', 66],
+        ['8', 100],
+        ['9', 11],
+        ['10', 66],
+        ['11', 100],
+        ['12', 11],
+        ['13', 66],
+        ['14', 100],
+        ['15', 11],
+        ['16', 66],
+        ['17', 100],
+        ['18', 11],
+        ['19', 66],
+        ['20', 100],
+        ['21', 11],
+        ['22', 66],
+        ['23', 100],
+        ['24', 11],
+        ['25', 66],
+        ['26a', 100],
+        ['26b', 11],
+        ['27a', 66],
+        ['27b', 9]
+        ]);
+        const options = {
+        title: 'Успеваемость',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+        };
+        const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        chart.draw(data, options);
+        }
 
 
     </script>
@@ -102,20 +102,20 @@
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
               title="Закрыть модальное окно">×</span>
-        <form class="modal-content" method="post">
+        <form class="modal-content" method="post" enctype="multipart/form-data">
             <div class="container">
-                <h1>Добавить новое задание в базу информатики</h1>
+                <h1>Добавить новое задание в базу математики</h1>
                 <hr>
-                        <div class="form-group">
-                            <input class="form-control" name="number" placeholder="Номер задания">
-                            <input class="form-control" name="text" placeholder="Текст задания"><br>
-                            <label>Картинка для задания(опционально)</label><br>
-                            <input type="file" name="picture"><br>
-                            <label>Файлы для задания(опционально)</label><br>
-                            <input type="file" name="file"><br>
-                            <input type="file" name="file2"><br>
-                            <input class="form-control" name="answer" placeholder="Ответ">
-                        </div>
+                <div class="form-group">
+                    <input class="form-control" name="number" placeholder="Номер задания">
+                    <input class="form-control" name="text" placeholder="Текст задания"><br>
+                    <label>Картинка для задания(опционально)</label><br>
+                    <input type="file" class="form-control-file" name="picture"><br>
+                    <label>Файлы для задания(опционально)</label><br>
+                    <input type="file" class="form-control-file" name="file"><br>
+                    <input type="file" class="form-control-file" name="file2"><br>
+                    <input class="form-control" name="answer" placeholder="Ответ">
+                </div>
                 <div class="clearfix">
                     <button type="button" onclick="document.getElementById('id01').style.display='none'"
                             class="cancelbtn btn btn-secondary">Отменить

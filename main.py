@@ -83,18 +83,16 @@ def res_admin1(name):
         task = __all_models.MathTasks()
         task.number = request.form['number']
         task.task_text = request.form['text']
-        f = request.files['picture']
-        print(f.read())
-        if request.form['picture']:
-            with open(request.files['picture'], 'rb') as file:
-                task.task_picture = file.read()
+        if request.files['picture']:
+            f = request.files['picture']
+            task.task_picture = f.read()
         task.answer = request.form['answer']
         session.add(task)
         session.commit()
         return render_template('res_admin_math.html', name=name)
 
 
-@app.route('/res_admin_inf/<name>')
+@app.route('/res_admin_inf/<name>', methods=['POST', 'GET'])
 def res_admin2(name):
     if request.method == 'GET':
         return render_template('res_admin_inf.html', name=name)
@@ -103,15 +101,15 @@ def res_admin2(name):
         task = __all_models.InfTasks()
         task.number = request.form['number']
         task.task_text = request.form['text']
-        if request.form['picture']:
-            with open(request.form['picture'], 'rb') as file:
-                task.task_picture = file.read()
-        if request.form['file']:
-            with open(request.form['file'], 'rb') as f:
-                task.file = f.read()
-        if request.form['file2']:
-            with open(request.form['file2'], 'rb') as f:
-                task.file2 = f.read()
+        if request.files['picture']:
+            f = request.files['picture']
+            task.task_picture = f.read()
+        if request.files['file']:
+            f = request.files['file']
+            task.file = f.read()
+        if request.files['file2']:
+            f = request.files['file2']
+            task.file2 = f.read()
         task.answer = request.form['answer']
         session.add(task)
         session.commit()
