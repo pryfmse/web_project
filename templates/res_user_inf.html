@@ -13,35 +13,35 @@
  function drawChart() {
  const data = google.visualization.arrayToDataTable([
  ['Task', 'Средний показатель в процентах'],
- ['1', 100],
- ['2', 11],
- ['3', 66],
- ['4', 10],
- ['5', 100],
- ['6', 11],
- ['7', 66],
- ['8', 100],
- ['9', 11],
- ['10', 66],
- ['11', 100],
- ['12', 11],
- ['13', 66],
- ['14', 100],
- ['15', 11],
- ['16', 66],
- ['17', 100],
- ['18', 11],
- ['19', 66],
- ['20', 100],
- ['21', 11],
- ['22', 66],
- ['23', 100],
- ['24', 11],
- ['25', 66],
- ['26a', 100],
- ['26b', 11],
- ['27a', 66],
- ['27b', 9]
+ ['1', {{user.t1}}],
+ ['2', {{user.t1}}],
+ ['3', {{user.t1}}],
+ ['4', {{user.t1}}],
+ ['5', {{user.t1}}],
+ ['6', {{user.t1}}],
+ ['7', {{user.t1}}],
+ ['8', {{user.t1}}],
+ ['9', {{user.t1}}],
+ ['10', {{user.t1}}],
+ ['11', {{user.t1}}],
+ ['12', {{user.t1}}],
+ ['13', {{user.t1}}],
+ ['14', {{user.t1}}],
+ ['15', {{user.t1}}],
+ ['16', {{user.t1}}],
+ ['17', {{user.t1}}],
+ ['18', {{user.t1}}],
+ ['19', {{user.t1}}],
+ ['20', {{user.t1}}],
+ ['21', {{user.t1}}],
+ ['22', {{user.t1}}],
+ ['23', {{user.t1}}],
+ ['24', {{user.t1}}],
+ ['25', {{user.t1}}],
+ ['26a', {{user.t1}}],
+ ['26b', {{user.t1}}],
+ ['27a', {{user.t1}}],
+ ['27b', {{user.t1}}]
  ]);
  const options = {
  title: 'Успеваемость',
@@ -74,7 +74,7 @@
                 <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="math_main">Математика</a>
+                <a class="nav-link" href="/math_main">Математика</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/inf_main">Информатика</a>
@@ -85,7 +85,7 @@
         </form>
     </div>
 </nav>
-<h1 class="display-4" align=center>Профиль: {{name}}</h1>
+<h1 class="display-4" align=center>Профиль: {{user.login}}</h1>
 <br>
 <div class="btn-group center" role="group" aria-label="Basic example">
     <a type="button" href="/res_user_math" class="btn btn-secondary">Математика</a>
@@ -96,7 +96,7 @@
 <div id="curve_chart" style="width: 100%; height: 500px"></div>
 </body>
 <h2 align=center>Прогноз: {{n}} первичных баллов</h2>
-<br> <br><br> <br><br> <br><br>
+<br> <br><a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a><br><br>
 <div class="b-example-divider"></div>
 
 <div class="container">

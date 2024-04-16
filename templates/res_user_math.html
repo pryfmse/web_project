@@ -68,7 +68,7 @@
         </form>
     </div>
 </nav>
-<h1 class="display-4" align=center>Профиль: {{name}}</h1>
+<h1 class="display-4" align=center>Профиль: {{user.login}}</h1>
 <br>
 <div class="btn-group center" role="group" aria-label="Basic example">
     <a type="button" href="/res_user_math" class="btn btn-secondary active">Математика</a>
@@ -79,7 +79,7 @@
 <div id="curve_chart" style="width: 100%; height: 500px"></div>
 </body>
 <h2 align=center>Прогноз: {{n}} первичных баллов</h2>
-<br> <br><br> <br><br> <br><br>
+<br> <br><a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a><br><br>
 <div class="b-example-divider"></div>
 
 <div class="container">

@@ -1,14 +1,18 @@
 import sqlalchemy
+from flask_login import UserMixin
+
 from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
 
-class Reg(SqlAlchemyBase):
+class Reg(SqlAlchemyBase, UserMixin):
     __tablename__ = 'registered'
 
+    id = sqlalchemy.Column(sqlalchemy.Integer, unique=True, autoincrement=True)
     login = sqlalchemy.Column(sqlalchemy.String, primary_key=True, nullable=False, unique=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     status = sqlalchemy.Column(sqlalchemy.String, nullable=False)
+    children = sqlalchemy.Column(sqlalchemy.String)
 
 
 class MathTasks(SqlAlchemyBase):
@@ -37,7 +41,7 @@ class InfTasks(SqlAlchemyBase):
 
 class InfResults(SqlAlchemyBase):
     __tablename__ = 'inf_res'
-    login = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("registered.login"), primary_key=True)
+    login = sqlalchemy.Column(sqlalchemy.String, sqlalchemy.ForeignKey("registered.login"), primary_key=True)
     t1 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     t2 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     t3 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
@@ -72,7 +76,7 @@ class InfResults(SqlAlchemyBase):
 
 class MathResults(SqlAlchemyBase):
     __tablename__ = 'math_res'
-    login = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("registered.login"), primary_key=True)
+    login = sqlalchemy.Column(sqlalchemy.String, sqlalchemy.ForeignKey("registered.login"), primary_key=True)
     t1 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     t2 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     t3 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
