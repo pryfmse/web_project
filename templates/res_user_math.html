@@ -13,18 +13,18 @@
  function drawChart() {
  const data = google.visualization.arrayToDataTable([
  ['Task', 'Средний показатель в процентах'],
- ['1', 100],
- ['2', 11],
- ['3', 66],
- ['4', 10],
- ['5', 100],
- ['6', 11],
- ['7', 66],
- ['8', 100],
- ['9', 11],
- ['10', 66],
- ['11', 100],
- ['12', 11]
+ ['1', {{user.t1}}],
+ ['2', {{user.t2}}],
+ ['3', {{user.t3}}],
+ ['4', {{user.t4}}],
+ ['5', {{user.t5}}],
+ ['6', {{user.t6}}],
+ ['7', {{user.t7}}],
+ ['8', {{user.t8}}],
+ ['9', {{user.t9}}],
+ ['10', {{user.t10}}],
+ ['11', {{user.t11}}],
+ ['12', {{user.t12}}]
  ]);
  const options = {
  title: 'Успеваемость',
@@ -78,7 +78,7 @@
 <br> <br> <br>
 <div id="curve_chart" style="width: 100%; height: 500px"></div>
 </body>
-<h2 align=center>Прогноз: {{n}} первичных баллов</h2>
+<h2 align=center>Прогноз: {{n_1}} первичных баллов ({{n_2}} вторичных баллов)</h2>
 <br> <br><a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a><br><br>
 <div class="b-example-divider"></div>
 
