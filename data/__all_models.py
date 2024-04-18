@@ -34,8 +34,8 @@ class InfTasks(SqlAlchemyBase):
     number = sqlalchemy.Column(sqlalchemy.Integer)
     task_text = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     task_picture = sqlalchemy.Column(sqlalchemy.LargeBinary)
-    file = sqlalchemy.Column(sqlalchemy.LargeBinary)
-    file2 = sqlalchemy.Column(sqlalchemy.LargeBinary)
+    file = sqlalchemy.Column(sqlalchemy.String)
+    file2 = sqlalchemy.Column(sqlalchemy.String)
     answer = sqlalchemy.Column(sqlalchemy.String, nullable=False)
 
 

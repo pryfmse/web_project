@@ -1,3 +1,4 @@
+import sqlalchemy
 from flask_login import login_required, logout_user, LoginManager, login_user, current_user
 
 from data import db_session
@@ -14,8 +15,9 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    print(db_sess.get(__all_models.Reg, 1))
-    return db_sess.get(__all_models.Reg, 1)
+    query = db_sess.query(__all_models.Reg).filter(sqlalchemy.text(user_id))
+    results = list(db_sess.execute(query))[0][0]  # придумать как переписать
+    return results
 
 
 @app.route('/logout')
@@ -89,9 +91,7 @@ def enter(mess=False):
 
 @app.route('/res_user_inf')
 def res_user_inf():
-    print(current_user)
     session = db_session.create_session()
-    print(session.query(__all_models.InfResults).filter(__all_models.InfResults.login == current_user.login))
     return render_template('res_user_inf.html', user=current_user)
 
 
@@ -130,12 +130,8 @@ def res_admin2():
         if request.files['picture']:
             f = request.files['picture']
             task.task_picture = f.read()
-        if request.files['file']:
-            f = request.files['file']
-            task.file = f.read()
-        if request.files['file2']:
-            f = request.files['file2']
-            task.file2 = f.read()
+        task.file = request.form['file']
+        task.file2 = request.form['file2']
         task.answer = request.form['answer']
         session.add(task)
         session.commit()
@@ -147,9 +143,21 @@ def math_main():
     return render_template('math_main.html')
 
 
-@app.route('/inf_main')
+@app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
-    return render_template('inf_main.html')
+    if request.method == 'GET':
+        return render_template('inf_main.html')
+    if request.method == 'POST':
+        print(request.form[i] for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14',
+                                        '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27'])
+
+
+@app.route('/decision', methods=['GET', 'POST'])
+def decision():
+    if request.method == 'GET':
+        return render_template('decision.html')
+    if request.method == 'POST':
+        return 'ok'
 
 
 def main():
