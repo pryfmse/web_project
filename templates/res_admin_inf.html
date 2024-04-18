@@ -54,6 +54,8 @@
 
 
 
+
+
     </script>
     <style>
         .center{
@@ -63,6 +65,8 @@
             padding-left: 200px;
             padding-right: 200px
         }
+
+
 
 
 
@@ -136,34 +140,47 @@
             <th scope="col">#</th>
             <th scope="col">Логин</th>
             <th scope="col">Средняя успеваемость</th>
-            <th scope="col">Профиль</th>
+            <th scope="col">Результат последнего пробника</th>
         </tr>
         </thead>
         <tbody>
+        {% for item in news['news'] %}
         <tr>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>54%</td>
             <td>@mdo</td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>98%</td>
-            <td>@zxcv</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>34%</td>
-            <td>@twitter</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
-<button type="button" class="btn btn-secondary btn-lg btn-block">Добавить ученика</button>
+<button onclick="document.getElementById('id02').style.display='block'" class="btn btn-secondary btn-lg btn-block">
+    Добавить ученика
+</button>
+
+<div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close"
+              title="Закрыть модальное окно">×</span>
+    <form class="modal-content" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <h1>Добавить ученика</h1>
+            <hr>
+            <div class="form-group">
+                <input class="form-control" name="answer" placeholder="Логин">
+            </div>
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn btn btn-secondary">Отменить
+                </button>
+                <button type="submit" class="signupbtn btn-dark btn">Добавить</button>
+            </div>
+        </div>
+    </form>
+</div>
 <br> <br> <br>
 <div id="curve_chart" style="width: 100%; height: 500px"></div>
+<br> <br><a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a><br><br>
 </body>
 <div class="b-example-divider"></div>
 

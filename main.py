@@ -10,17 +10,17 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-trans_inf = {1: 7, 2: 14, 3: 20, 4: 27, 5: 34, 6: 40, 7: 43, 8: 46, 9: 48, 10: 51, 11: 54, 12: 56,
+trans_inf = {0: 0, 1: 7, 2: 14, 3: 20, 4: 27, 5: 34, 6: 40, 7: 43, 8: 46, 9: 48, 10: 51, 11: 54, 12: 56,
              13: 59, 14: 62, 15: 64, 16: 67, 17: 70, 18: 72, 19: 75, 20: 78, 21: 80, 22: 83, 23: 85,
              24: 88, 25: 90, 26: 93, 27: 95, 28: 98, 29: 100}
-trans_math = {1: 6, 2: 11, 3: 17, 4: 22, 5: 27, 6: 34, 7: 40, 8: 46, 9: 52, 10: 58, 11: 64, 12: 70}
+trans_math = {0: 0, 1: 6, 2: 11, 3: 17, 4: 22, 5: 27, 6: 34, 7: 40, 8: 46, 9: 52, 10: 58, 11: 64, 12: 70}
 
 
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    query = db_sess.query(__all_models.Reg).filter(sqlalchemy.text(user_id))
-    results = list(db_sess.execute(query))[0][0]  # придумать как переписать
+    query = db_sess.query(__all_models.Reg).filter(__all_models.Reg.id == sqlalchemy.text(user_id))
+    results = list(db_sess.execute(query))[0][0]  # авторизация работает, но возникает ошибка. нужно придумать как переписать
     return results
 
 
@@ -58,7 +58,7 @@ def reg_user():
         session.add(user_inf)
         session.add(user_math)
         session.commit()
-        login_user(user, remember=True)
+        login_user(user)
         return redirect(f'/res_user_inf')
 
 
@@ -78,7 +78,7 @@ def reg_admin(mess=False):
 
             session.add(user)
             session.commit()
-            login_user(user, remember=True)
+            login_user(user)
             return redirect(f'/res_admin_inf')
         else:
             return render_template('reg_admin.html', mess='Неверный ключ')
@@ -89,7 +89,7 @@ def enter(mess=False):
     if current_user.is_authenticated:
         if current_user.status == 'user':
             return redirect('/res_user_inf')
-        else:
+        elif current_user.status == 'admin':
             return redirect('/res_admin_inf')
     else:
         if request.method == 'GET':
@@ -99,8 +99,11 @@ def enter(mess=False):
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
                                                             __all_models.Reg.password == request.form['password']):
                 user = session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']).first()
-                login_user(user, remember=True)
-                return redirect('/inf_main')
+                login_user(user)
+                if current_user.status == 'user':
+                    return redirect('/res_user_inf')
+                elif current_user.status == 'admin':
+                    return redirect('/res_admin_inf')
             else:
                 return render_template('enter.html', mess='Не удалось войти')
 
@@ -174,11 +177,11 @@ def math_main():
 
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
-    if request.method == 'GET':
-        return render_template('inf_main.html')
-    if request.method == 'POST':
-        print(request.form[i] for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14',
-                                        '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27'])
+    print(request.form.getlist('inf'))
+    print(1)
+    return render_template('inf_main.html')
+    # for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14',
+    #           '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27']
 
 
 @app.route('/decision', methods=['GET', 'POST'])
