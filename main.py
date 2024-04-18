@@ -86,17 +86,23 @@ def reg_admin(mess=False):
 
 @app.route('/enter', methods=['POST', 'GET'])
 def enter(mess=False):
-    if request.method == 'GET':
-        return render_template('enter.html', mess=mess)
-    elif request.method == 'POST':
-        session = db_session.create_session()
-        for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
-                                                        __all_models.Reg.password == request.form['password']):
-            user = session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']).first()
-            login_user(user, remember=True)
-            return redirect('/inf_main')
+    if current_user.is_authenticated:
+        if current_user.status == 'user':
+            return redirect('/res_user_inf')
         else:
-            return render_template('enter.html', mess='Не удалось войти')
+            return redirect('/res_admin_inf')
+    else:
+        if request.method == 'GET':
+            return render_template('enter.html', mess=mess)
+        elif request.method == 'POST':
+            session = db_session.create_session()
+            for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
+                                                            __all_models.Reg.password == request.form['password']):
+                user = session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']).first()
+                login_user(user, remember=True)
+                return redirect('/inf_main')
+            else:
+                return render_template('enter.html', mess='Не удалось войти')
 
 
 @app.route('/res_user_inf')

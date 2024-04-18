@@ -16,6 +16,7 @@
         }
 
 
+
     </style>
     <title>Регистрация</title>
 </head>
@@ -40,7 +41,7 @@
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
-                <a class="btn btn-outline-light my-2 my-sm-0" href="/enter" type="submit">Вход</a>
+                <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
             </form>
         </div>
     </nav>
@@ -59,7 +60,7 @@
         <button type="submit" class="btn btn-primary btn-lg btn-block">Зарегистрироваться</button>
         <br>
         <a href="/enter" type="button" class="btn btn-secondary btn-lg btn-block">Вход</a>
-                {% if mess %}
+        {% if mess %}
         <br>
         <div class="alert alert-dark" role="alert"> {{mess}}</div>
         {% endif %}
