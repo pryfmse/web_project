@@ -145,11 +145,9 @@ def res_admin1():
                 n = [results.t1, results.t2, results.t3, results.t4, results.t5, results.t6,
                      results.t7, results.t8, results.t9, results.t10, results.t11, results.t12]
                 for j in range(len(graphik)):
-                    print(graphik)
                     graphik[j].append(n[j])
                 query = session.query(__all_models.Variant).filter(__all_models.Variant.login == i)
                 if list(session.execute(query)):
-                    print(list(session.execute(query)))
                     table.append((i, sum(n) // 12, list(session.execute(query))))
                 else:
                     table.append((i, sum(n) // 12, 0))
@@ -201,7 +199,6 @@ def res_admin2():
                     graphik[j].append(n[j])
                 query = session.query(__all_models.Variant).filter(__all_models.Variant.login == i)
                 if list(session.execute(query)):
-                    print(list(session.execute(query)))
                     table.append((i, sum(n) // 29, list(session.execute(query))))
                 else:
                     table.append((i, sum(n) // 29, 0))
