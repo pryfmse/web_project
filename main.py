@@ -116,7 +116,8 @@ def res_user_inf():
     n = len(list(filter(lambda x: x >= 70, [results.t1, results.t2, results.t3, results.t4, results.t5, results.t6,
                                             results.t7, results.t8, results.t9, results.t10, results.t11, results.t12,
                                             results.t13, results.t14, results.t15, results.t16, results.t17,
-                                            results.t18, results.t19, results.t20, results.t21, results.t22, results.t23,
+                                            results.t18, results.t19, results.t20, results.t21, results.t22,
+                                            results.t23,
                                             results.t24, results.t25, results.t26a, results.t26b, results.t27a,
                                             results.t27b])))
     return render_template('res_user_inf.html', user=results, n_1=n, n_2=trans_inf[n])
@@ -128,7 +129,8 @@ def res_user_math():
     query = db_sess.query(__all_models.MathResults).filter(__all_models.MathResults.login == current_user.login)
     results = list(db_sess.execute(query))[0][0]
     n = len(list(filter(lambda x: x >= 70, [results.t1, results.t2, results.t3, results.t4, results.t5, results.t6,
-                                            results.t7, results.t8, results.t9, results.t10, results.t11, results.t12])))
+                                            results.t7, results.t8, results.t9, results.t10, results.t11,
+                                            results.t12])))
     return render_template('res_user_math.html', user=results, n_1=n, n_2=trans_math[n])
 
 
@@ -234,24 +236,24 @@ def res_admin2():
             return render_template('res_admin_inf.html', user=current_user)
 
 
-@app.route('/math_main')
+@app.route('/math_main', methods=['GET', 'POST'])
 def math_main():
+    if request.method == 'POST':
+        return redirect('/decision', lst=request.form.getlist('math'))
     return render_template('math_main.html')
 
 
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
-    print(request.form.getlist('inf'))
-    print(1)
+    if request.method == 'POST':
+        return redirect('/decision', lst=request.form.getlist('inf'))
     return render_template('inf_main.html')
-    # for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14',
-    #           '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27']
 
 
 @app.route('/decision', methods=['GET', 'POST'])
-def decision():
+def decision(lst):
     if request.method == 'GET':
-        return render_template('decision.html')
+        return render_template('decision.html', )
     if request.method == 'POST':
         return 'ok'
 
@@ -263,7 +265,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 #             with open('data.png', 'wb') as file:
 #                 file.write(self.foto[0])
