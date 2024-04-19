@@ -1,3 +1,5 @@
+from random import randint
+
 import sqlalchemy
 from flask_login import login_required, logout_user, LoginManager, login_user, current_user
 
@@ -239,21 +241,33 @@ def res_admin2():
 @app.route('/math_main', methods=['GET', 'POST'])
 def math_main():
     if request.method == 'POST':
-        return redirect('/decision', lst=request.form.getlist('math'))
+        session = db_session.create_session()
+        a = []
+        for i in request.form.getlist('math'):
+            results = list(
+                session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == int(i))))
+            a.append(results[randint(0, len(results)) - 1][0])
+        return render_template('decision.html', lst=a, object='math')
     return render_template('math_main.html')
 
 
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
     if request.method == 'POST':
-        return redirect('/decision', lst=request.form.getlist('inf'))
+        session = db_session.create_session()
+        a = []
+        for i in request.form.getlist('inf'):
+            results = list(
+                session.execute(session.query(__all_models.InfResults).filter(__all_models.InfTasks.number == int(i))))
+            a.append(results[randint(0, len(results)) - 1][0])
+        return render_template('decision.html', lst=a, object='inf')
     return render_template('inf_main.html')
 
 
 @app.route('/decision', methods=['GET', 'POST'])
 def decision(lst):
     if request.method == 'GET':
-        return render_template('decision.html', )
+        return render_template('decision.html')
     if request.method == 'POST':
         return 'ok'
 

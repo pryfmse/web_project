@@ -19,6 +19,7 @@
         }
 
 
+
     </style>
 </head>
 <body>
@@ -46,53 +47,54 @@
             </form>
         </div>
     </nav>
+
+    {% for item in lst %}
+    {% if not item.picture %}
     <div class="px-4 pt-5 my-5 text-center border-bottom">
-        <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание 1</h2>
+        <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
         <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">Определите, сколько раз в тексте романа Александра Грина «Бегущая по волнам»
-                встречаются слова с сочетанием букв «удар», например «сударь», «Ударили», «ударный». Отдельные слова
-                «удар» и «Удар» учитывать не следует. В ответе запишите только число.</p>
+            <p class="lead mb-4">{{item.task_text}}</p>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Ответ:</span>
                 <textarea class="form-control"></textarea>
             </div>
         </div>
-        <a href="https://example.com">Скачать файл</a>
+        {% if object=='inf' and item.file %}
+        <a href={{item.file}}>Скачать файл</a>
+        {% endif %}
+        {% if object=='inf' and item.file2 %}
+        <a href={{item.file2}}>Скачать файл</a>
+        {% endif %}
     </div>
+    {% else %}
     <div class="b-example-divider"></div>
-
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+                <img src={{item.task_picture}} class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
                      height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание 2</h2>
-                <p class="lead">В файле приведён фрагмент базы данных «Продукты» о поставках товаров в магазины районов
-                    города. База данных состоит из трёх таблиц.
-
-                    Таблица «Движение товаров» содержит записи о поставках товаров в магазины в течение первой декады
-                    июня 2021 г., а также информацию о проданных товарах.
-
-                    Поле Тип операции содержит значение Поступление или Продажа, а в соответствующее поле Количество
-                    упаковок, шт. занесена информация о том, сколько упаковок товара поступило в магазин или было
-                    продано в течение дня.
-
-                    Таблица «Товар» содержит информацию об основных характеристиках каждого товара.
-
-                    Таблица «Магазин» содержит информацию о местонахождении магазинов. На рисунке приведена схема
-                    указанной базы данных.</p>
+                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+                <p class="lead">{{item.task_text}}</p>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Ответ:</span>
                     <textarea class="form-control"></textarea>
                 </div>
-                <a href="https://example.com">Скачать файл</a>
+                {% if object=='inf' and item.file %}
+                <a href={{item.file}}>Скачать файл</a>
+                {% endif %}
+                {% if object=='inf' and item.file2 %}
+                <a href={{item.file2}}>Скачать файл</a>
+                {% endif %}
             </div>
         </div>
     </div>
+    {% endif %}
+    {% endfor %}
+
 </header>
-<a type="button" href="/reg_user" class="btn btn-secondary btn-lg btn-block">Отправить ответы</a><br><br>
+<a type="button" href="/res" class="btn btn-secondary btn-lg btn-block">Отправить ответы</a><br><br>
 
 </body>
 <div class="b-example-divider"></div>
