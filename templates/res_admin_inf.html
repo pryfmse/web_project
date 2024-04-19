@@ -13,35 +13,13 @@
         function drawChart() {
         const data = google.visualization.arrayToDataTable([
         ['Task', 'Средний показатель в процентах'],
-        ['1', 100],
-        ['2', 11],
-        ['3', 66],
-        ['4', 10],
-        ['5', 100],
-        ['6', 11],
-        ['7', 66],
-        ['8', 100],
-        ['9', 11],
-        ['10', 66],
-        ['11', 100],
-        ['12', 11],
-        ['13', 66],
-        ['14', 100],
-        ['15', 11],
-        ['16', 66],
-        ['17', 100],
-        ['18', 11],
-        ['19', 66],
-        ['20', 100],
-        ['21', 11],
-        ['22', 66],
-        ['23', 100],
-        ['24', 11],
-        ['25', 66],
-        ['26a', 100],
-        ['26b', 11],
-        ['27a', 66],
-        ['27b', 9]
+        {% for i in range(25) %}
+        [{{i + 1}}, {{graphik[i]}}],
+        {% endfor %}
+        ['26a', {{graphik[25]}}],
+        ['26b', {{graphik[26]}}],
+        ['27a', {{graphik[27]}}],
+        ['27b', {{graphik[28]}}]
         ]);
         const options = {
         title: 'Успеваемость',
@@ -51,11 +29,6 @@
         const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
         chart.draw(data, options);
         }
-
-
-
-
-
     </script>
     <style>
         .center{
@@ -65,11 +38,6 @@
             padding-left: 200px;
             padding-right: 200px
         }
-
-
-
-
-
     </style>
     <title>Результаты класса</title>
 </head>
@@ -144,12 +112,12 @@
         </tr>
         </thead>
         <tbody>
-        {% for item in news['news'] %}
+        {% for j in table%}
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>54%</td>
-            <td>@mdo</td>
+            <th scope="row"></th>
+            <td>{{j[0]}}</td>
+            <td>{{j[1]}}</td>
+            <td>{{j[2]}}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -167,7 +135,7 @@
             <h1>Добавить ученика</h1>
             <hr>
             <div class="form-group">
-                <input class="form-control" name="answer" placeholder="Логин">
+                <input class="form-control" name="log" placeholder="Логин">
             </div>
             <div class="clearfix">
                 <button type="button" onclick="document.getElementById('id02').style.display='none'"

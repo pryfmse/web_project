@@ -97,6 +97,5 @@ class Variant(SqlAlchemyBase):
     __tablename__ = 'variant'
     login = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("registered.login"), primary_key=True)
     ball1 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
-    ball2 = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
     reg = orm.relationship('Reg')

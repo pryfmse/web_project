@@ -20,7 +20,7 @@ trans_math = {0: 0, 1: 6, 2: 11, 3: 17, 4: 22, 5: 27, 6: 34, 7: 40, 8: 46, 9: 52
 def load_user(user_id):
     db_sess = db_session.create_session()
     query = db_sess.query(__all_models.Reg).filter(__all_models.Reg.id == sqlalchemy.text(user_id))
-    results = list(db_sess.execute(query))[0][0]  # авторизация работает, но возникает ошибка. нужно придумать как переписать
+    results = list(db_sess.execute(query))[0][0]
     return results
 
 
@@ -134,40 +134,107 @@ def res_user_math():
 
 @app.route('/res_admin_math', methods=['POST', 'GET'])
 def res_admin1():
+    session = db_session.create_session()
     if request.method == 'GET':
-        return render_template('res_admin_math.html', user=current_user)
+        if current_user.children:
+            table = []
+            graphik = [[], [], [], [], [], [], [], [], [], [], [], []]
+            for i in current_user.children.split():
+                query = session.query(__all_models.InfResults).filter(__all_models.InfResults.login == i)
+                results = list(session.execute(query))[0][0]
+                n = [results.t1, results.t2, results.t3, results.t4, results.t5, results.t6,
+                     results.t7, results.t8, results.t9, results.t10, results.t11, results.t12]
+                for j in range(len(graphik)):
+                    print(graphik)
+                    graphik[j].append(n[j])
+                query = session.query(__all_models.Variant).filter(__all_models.Variant.login == i)
+                if list(session.execute(query)):
+                    print(list(session.execute(query)))
+                    table.append((i, sum(n) // 12, list(session.execute(query))))
+                else:
+                    table.append((i, sum(n) // 12, 0))
+            graphik = [sum(k) // len(k) for k in graphik]
+            return render_template('res_admin_math.html', user=current_user, table=table, graphik=graphik)
+        else:
+            return render_template('res_admin_math.html', user=current_user, table=[], graphik=[0, 0, 0, 0, 0,
+                                                                                                0, 0, 0, 0, 0, 0, 0])
     elif request.method == 'POST':
-        session = db_session.create_session()
-        task = __all_models.MathTasks()
-        task.number = request.form['number']
-        task.task_text = request.form['text']
-        if request.files['picture']:
-            f = request.files['picture']
-            task.task_picture = f.read()
-        task.answer = request.form['answer']
-        session.add(task)
-        session.commit()
-        return render_template('res_admin_math.html', user=current_user)
+        if request.form['log']:
+            if current_user.children:
+                current_user.children += ' ' + request.form['log']
+            else:
+                current_user.children = request.form['log']
+            session.merge(current_user)
+            session.commit()
+            return render_template('res_admin_math.html', user=current_user)
+        else:
+            task = __all_models.MathTasks()
+            task.number = request.form['number']
+            task.task_text = request.form['text']
+            if request.files['picture']:
+                f = request.files['picture']
+                task.task_picture = f.read()
+            task.answer = request.form['answer']
+            session.add(task)
+            session.commit()
+            return render_template('res_admin_math.html', user=current_user)
 
 
 @app.route('/res_admin_inf', methods=['POST', 'GET'])
 def res_admin2():
+    session = db_session.create_session()
     if request.method == 'GET':
-        return render_template('res_admin_inf.html', user=current_user)
+        if current_user.children:
+            table = []
+            graphik = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+                       [], [], [], [], [], [], [], [], [], [], [], []]
+            for i in current_user.children.split():
+                query = session.query(__all_models.InfResults).filter(__all_models.InfResults.login == i)
+                results = list(session.execute(query))[0][0]
+                n = [results.t1, results.t2, results.t3, results.t4, results.t5, results.t6,
+                     results.t7, results.t8, results.t9, results.t10, results.t11, results.t12,
+                     results.t13, results.t14, results.t15, results.t16, results.t17,
+                     results.t18, results.t19, results.t20, results.t21, results.t22, results.t23,
+                     results.t24, results.t25, results.t26a, results.t26b, results.t27a,
+                     results.t27b]
+                for j in range(len(graphik)):
+                    graphik[j].append(n[j])
+                query = session.query(__all_models.Variant).filter(__all_models.Variant.login == i)
+                if list(session.execute(query)):
+                    print(list(session.execute(query)))
+                    table.append((i, sum(n) // 29, list(session.execute(query))))
+                else:
+                    table.append((i, sum(n) // 29, 0))
+            graphik = [sum(k) // len(k) for k in graphik]
+            return render_template('res_admin_inf.html', user=current_user, table=table, graphik=graphik)
+        else:
+            return render_template('res_admin_inf.html', user=current_user, table=[], graphik=[0, 0, 0, 0, 0, 0, 0,
+                                                                                               0, 0, 0, 0, 0, 0, 0,
+                                                                                               0, 0, 0, 0, 0, 0, 0,
+                                                                                               0, 0, 0, 0, 0, 0, 0, 0])
     elif request.method == 'POST':
-        session = db_session.create_session()
-        task = __all_models.InfTasks()
-        task.number = request.form['number']
-        task.task_text = request.form['text']
-        if request.files['picture']:
-            f = request.files['picture']
-            task.task_picture = f.read()
-        task.file = request.form['file']
-        task.file2 = request.form['file2']
-        task.answer = request.form['answer']
-        session.add(task)
-        session.commit()
-        return render_template('res_admin_inf.html', user=current_user)
+        if request.form['log']:
+            if current_user.children:
+                current_user.children += ' ' + request.form['log']
+            else:
+                current_user.children = request.form['log']
+            session.merge(current_user)
+            session.commit()
+            return render_template('res_admin_math.html', user=current_user)
+        else:
+            session = db_session.create_session()
+            task = __all_models.InfTasks()
+            task.number = request.form['number']
+            task.task_text = request.form['text']
+            if request.files['picture']:
+                f = request.files['picture']
+                task.task_picture = f.read()
+            task.file = request.form['file']
+            task.file2 = request.form['file2']
+            task.answer = request.form['answer']
+            session.add(task)
+            session.commit()
+            return render_template('res_admin_inf.html', user=current_user)
 
 
 @app.route('/math_main')
