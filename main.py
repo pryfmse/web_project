@@ -265,18 +265,33 @@ def inf_main():
     return render_template('inf_main.html')
 
 
-@app.route('/decision', methods=['GET', 'POST'])
-def decision(lst):
+@app.route('/decision/<obj>', methods=['GET', 'POST'])
+def decision(obj):
     session = db_session.create_session()
     if request.method == 'GET':
         a = []
-        for i in range(1, 28):
-            results = list(
-                session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == i)))
-            a.append(results[randint(0, len(results)) - 1][0])
-        return render_template('decision.html', lst=a, object='inf')
-    if request.method == 'POST':
-        return 'ok'
+        if obj == 'inf':
+            for i in range(1, 28):
+                results = list(
+                    session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == i)))
+                a.append(results[randint(0, len(results)) - 1][0])
+        elif obj == 'math':
+            for i in range(1, 13):
+                results = list(
+                    session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == i)))
+                a.append(results[randint(0, len(results)) - 1][0])
+        return render_template('decision.html', lst=a, object=obj)
+    elif request.method == 'POST':
+        res = []
+        summ = 0
+        for i in request.form.keys():
+            a, b = i.split('_')
+            v = 1 if b == request.form[i] else 0
+            summ += v
+            res.append((a, v))
+            if current_user.is_authenticated:
+                pass
+        return render_template('res.html', res=res, itog=summ)
 
 
 def main():

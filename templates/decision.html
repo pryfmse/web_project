@@ -17,6 +17,7 @@
             padding-top: 50px;
             padding-bottom:50px
         }
+
     </style>
 </head>
 <body>
@@ -44,54 +45,56 @@
             </form>
         </div>
     </nav>
-
-    {% for item in lst %}
-    {% if not item.picture %}
-    <div class="px-4 pt-5 my-5 text-center border-bottom">
-        <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">{{item.task_text}}</p>
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text">Ответ:</span>
-                <textarea class="form-control"></textarea>
-            </div>
-        </div>
-        {% if object=='inf' and item.file %}
-        <a href="{{ item.file }}">Скачать файл</a><br>
-        {% endif %}
-        {% if object=='inf' and item.file2 %}
-        <a href="{{ item.file2 }}">Скачать файл</a>
-        {% endif %}
-    </div>
-    {% else %}
-    <div class="b-example-divider"></div>
-    <div class="container col-xxl-8 px-4 py-5">
-        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-                <img src="data:image/png;base64,{{item.task_picture}}" class="d-block mx-lg-auto img-fluid" alt="Image"
-                     width="700" height="500" loading="lazy" srcset="data:image/png;base64,{{item.task_picture}}">
-            </div>
-            <div class="col-lg-6">
-                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
-                <p class="lead">{{item.task_text}}</p>
+    <form class='pad' method="post" enctype="multipart/form-data">
+        {% for item in lst %}
+        {% if not item.picture %}
+        <div class="px-4 pt-5 my-5 text-center border-bottom">
+            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">{{item.task_text}}</p>
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text">Ответ:</span>
-                    <textarea class="form-control"></textarea>
+                    <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
                 </div>
-                {% if object=='inf' and item.file %}
-                <a href="{{ item.file }}">Скачать файл</a><br>
-                {% endif %}
-                {% if object=='inf' and item.file2 %}
-                <a href="{{ item.file2 }}">Скачать файл</a>
-                {% endif %}
+            </div>
+            {% if object=='inf' and item.file %}
+            <a href="{{ item.file }}">Скачать файл</a><br>
+            {% endif %}
+            {% if object=='inf' and item.file2 %}
+            <a href="{{ item.file2 }}">Скачать файл</a>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="b-example-divider"></div>
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="data:image/png;base64,{{item.task_picture}}" class="d-block mx-lg-auto img-fluid"
+                         alt="Image"
+                         width="700" height="500" loading="lazy" srcset="data:image/png;base64,{{item.task_picture}}">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+                    <p class="lead">{{item.task_text}}</p>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" name="{{ item.number }}_{{ item.answer }}">Ответ:</span>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    {% if object=='inf' and item.file %}
+                    <a href="{{ item.file }}">Скачать файл</a><br>
+                    {% endif %}
+                    {% if object=='inf' and item.file2 %}
+                    <a href="{{ item.file2 }}">Скачать файл</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
+        <button type="submit" href="#" class="btn btn-secondary btn-lg btn-block">Отправить ответы</button><br><br>
+    </form>
 
 </header>
-<a type="button" href="/res" class="btn btn-secondary btn-lg btn-block">Отправить ответы</a><br><br>
 
 </body>
 <div class="b-example-divider"></div>
