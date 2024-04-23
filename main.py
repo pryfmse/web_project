@@ -258,16 +258,23 @@ def inf_main():
         a = []
         for i in request.form.getlist('inf'):
             results = list(
-                session.execute(session.query(__all_models.InfResults).filter(__all_models.InfTasks.number == int(i))))
+                session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == int(i))))
             a.append(results[randint(0, len(results)) - 1][0])
+        print(a[0].file)
         return render_template('decision.html', lst=a, object='inf')
     return render_template('inf_main.html')
 
 
 @app.route('/decision', methods=['GET', 'POST'])
 def decision(lst):
+    session = db_session.create_session()
     if request.method == 'GET':
-        return render_template('decision.html')
+        a = []
+        for i in range(1, 28):
+            results = list(
+                session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == i)))
+            a.append(results[randint(0, len(results)) - 1][0])
+        return render_template('decision.html', lst=a, object='inf')
     if request.method == 'POST':
         return 'ok'
 
@@ -279,8 +286,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-#             with open('data.png', 'wb') as file:
-#                 file.write(self.foto[0])
-
-# if current_user.is_authenticated:

@@ -17,9 +17,6 @@
             padding-top: 50px;
             padding-bottom:50px
         }
-
-
-
     </style>
 </head>
 <body>
@@ -60,10 +57,10 @@
             </div>
         </div>
         {% if object=='inf' and item.file %}
-        <a href={{item.file}}>Скачать файл</a>
+        <a href="{{ item.file }}">Скачать файл</a><br>
         {% endif %}
         {% if object=='inf' and item.file2 %}
-        <a href={{item.file2}}>Скачать файл</a>
+        <a href="{{ item.file2 }}">Скачать файл</a>
         {% endif %}
     </div>
     {% else %}
@@ -71,8 +68,8 @@
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src={{item.task_picture}} class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-                     height="500" loading="lazy">
+                <img src="data:image/png;base64,{{item.task_picture}}" class="d-block mx-lg-auto img-fluid" alt="Image"
+                     width="700" height="500" loading="lazy" srcset="data:image/png;base64,{{item.task_picture}}">
             </div>
             <div class="col-lg-6">
                 <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
@@ -82,10 +79,10 @@
                     <textarea class="form-control"></textarea>
                 </div>
                 {% if object=='inf' and item.file %}
-                <a href={{item.file}}>Скачать файл</a>
+                <a href="{{ item.file }}">Скачать файл</a><br>
                 {% endif %}
                 {% if object=='inf' and item.file2 %}
-                <a href={{item.file2}}>Скачать файл</a>
+                <a href="{{ item.file2 }}">Скачать файл</a>
                 {% endif %}
             </div>
         </div>
