@@ -18,6 +18,7 @@
             padding-bottom:50px
         }
 
+
     </style>
 </head>
 <body>
@@ -41,13 +42,13 @@
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
-                <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
+                <a href="/enter"><img src="static/img/профиль.png" alt="Профиль"></a>
             </form>
         </div>
     </nav>
     <form class='pad' method="post" enctype="multipart/form-data">
         {% for item in lst %}
-        {% if not item.picture %}
+        {% if not item.number in photo.keys() %}
         <div class="px-4 pt-5 my-5 text-center border-bottom">
             <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
             <div class="col-lg-6 mx-auto">
@@ -69,9 +70,7 @@
         <div class="container col-xxl-8 px-4 py-5">
             <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                 <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="data:image/png;base64,{{item.task_picture}}" class="d-block mx-lg-auto img-fluid"
-                         alt="Image"
-                         width="700" height="500" loading="lazy" srcset="data:image/png;base64,{{item.task_picture}}">
+                    <img src="{{ photo[item.number] }}" alt="{{ photo[item.number] }}">
                 </div>
                 <div class="col-lg-6">
                     <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
@@ -91,7 +90,8 @@
         </div>
         {% endif %}
         {% endfor %}
-        <button type="submit" href="#" class="btn btn-secondary btn-lg btn-block">Отправить ответы</button><br><br>
+        <button type="submit" href="#" class="btn btn-secondary btn-lg btn-block">Отправить ответы</button>
+        <br><br>
     </form>
 
 </header>

@@ -13,18 +13,9 @@
  function drawChart() {
  const data = google.visualization.arrayToDataTable([
  ['Task', 'Средний показатель в процентах'],
- ['1', {{user.t1}}],
- ['2', {{user.t2}}],
- ['3', {{user.t3}}],
- ['4', {{user.t4}}],
- ['5', {{user.t5}}],
- ['6', {{user.t6}}],
- ['7', {{user.t7}}],
- ['8', {{user.t8}}],
- ['9', {{user.t9}}],
- ['10', {{user.t10}}],
- ['11', {{user.t11}}],
- ['12', {{user.t12}}]
+        {% for i in range(12) %}
+        [{{i + 1}}, {{user[i]}}],
+        {% endfor %}
  ]);
  const options = {
  title: 'Успеваемость',
@@ -70,7 +61,7 @@
         </form>
     </div>
 </nav>
-<h1 class="display-4" align=center>Профиль: {{user.login}}</h1>
+<h1 class="display-4" align=center>Профиль: {{prof}}</h1>
 <br>
 <div class="btn-group center" role="group" aria-label="Basic example">
     <a type="button" href="/res_user_math" class="btn btn-secondary active">Математика</a>

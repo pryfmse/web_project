@@ -13,36 +13,14 @@
  function drawChart() {
  const data = google.visualization.arrayToDataTable([
  ['Task', 'Средний показатель в процентах'],
- ['1', {{user.t1}}],
- ['2', {{user.t2}}],
- ['3', {{user.t3}}],
- ['4', {{user.t4}}],
- ['5', {{user.t5}}],
- ['6', {{user.t6}}],
- ['7', {{user.t7}}],
- ['8', {{user.t8}}],
- ['9', {{user.t9}}],
- ['10', {{user.t10}}],
- ['11', {{user.t11}}],
- ['12', {{user.t12}}],
- ['13', {{user.t13}}],
- ['14', {{user.t14}}],
- ['15', {{user.t15}}],
- ['16', {{user.t16}}],
- ['17', {{user.t17}}],
- ['18', {{user.t18}}],
- ['19', {{user.t19}}],
- ['20', {{user.t20}}],
- ['21', {{user.t21}}],
- ['22', {{user.t22}}],
- ['23', {{user.t23}}],
- ['24', {{user.t24}}],
- ['25', {{user.t25}}],
- ['26a', {{user.t26a}}],
- ['26b', {{user.t26b}}],
- ['27a', {{user.t27a}}],
- ['27b', {{user.t27b}}]
- ]);
+ {% for i in range(25) %}
+        [{{i + 1}}, {{user[i]}}],
+        {% endfor %}
+        ['26a', {{user[25]}}],
+        ['26b', {{user[26]}}],
+        ['27a', {{user[27]}}],
+        ['27b', {{user[28]}}]
+        ]);
  const options = {
  title: 'Успеваемость',
  curveType: 'function',
@@ -52,13 +30,11 @@
  chart.draw(data, options);
  }
 
-
     </script>
     <style>
         .center{
             padding-left: 650px
         }
-
 
     </style>
     <title>Результаты</title>
@@ -87,7 +63,7 @@
         </form>
     </div>
 </nav>
-<h1 class="display-4" align=center>Профиль: {{user.login}}</h1>
+<h1 class="display-4" align=center>Профиль: {{prof}}</h1>
 <br>
 <div class="btn-group center" role="group" aria-label="Basic example">
     <a type="button" href="/res_user_math" class="btn btn-secondary">Математика</a>
