@@ -353,6 +353,16 @@ def decision(obj):
         return render_template('res.html', res=res, itog=summ)
 
 
+@app.route('/motivation')
+def mot():
+    return render_template('motivation.html')
+
+
+@app.route('/lifehack')
+def lifeh():
+    return render_template('lifeh.html')
+
+
 def main():
     db_session.global_init("db/data.db")
     app.run()
