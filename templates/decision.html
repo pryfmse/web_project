@@ -18,6 +18,10 @@
             padding-top: 50px;
             padding-bottom:50px
         }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
 
     </style>
 </head>
@@ -46,14 +50,65 @@
             </form>
         </div>
     </nav>
+    <form class='pad' method="post" enctype="multipart/form-data">
+        {% for item in lst %}
+        {% if not item.number in photo.keys() %}
+        <div class="px-4 pt-5 my-5 text-center border-bottom">
+            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">{{item.task_text}}</p>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Ответ:</span>
+                    <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
+                </div>
+            </div>
+            {% if object=='inf' and item.file %}
+            <a href="{{ item.file }}">Скачать файл</a><br>
+            {% endif %}
+            {% if object=='inf' and item.file2 %}
+            <a href="{{ item.file2 }}">Скачать файл</a>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="b-example-divider"></div>
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="{{ photo[item.number] }}" alt="{{ photo[item.number] }}">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+                    <p class="lead">{{item.task_text}}</p>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" name="{{ item.number }}_{{ item.answer }}">Ответ:</span>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    {% if object=='inf' and item.file %}
+                    <a href="{{ item.file }}">Скачать файл</a><br>
+                    {% endif %}
+                    {% if object=='inf' and item.file2 %}
+                    <a href="{{ item.file2 }}">Скачать файл</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" href="#" class="btn btn-secondary btn-lg btn-block">Отправить ответы</button>
+        <br><br>
+    </form>
+
 </header>
+
 </body>
+<div class="b-example-divider"></div>
+
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Главная</a></li>
-            <li class="nav-item"><a href="/motivation" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
-            <li class="nav-item"><a href="/lifehack" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
         </ul>
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>

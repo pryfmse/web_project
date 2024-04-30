@@ -1,4 +1,3 @@
-import base64
 from random import randint
 
 import sqlalchemy
@@ -9,6 +8,7 @@ from flask import Flask, render_template, request, redirect
 from data import __all_models
 
 app = Flask(__name__)
+flag = False
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
@@ -260,97 +260,119 @@ def math_main():
     if request.method == 'POST':
         session = db_session.create_session()
         a = []
+        photo = {}
         for i in request.form.getlist('math'):
             results = list(
                 session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == int(i))))
-            a.append(results[randint(0, len(results)) - 1][0])
-        return render_template('decision.html', lst=a, object='math')
+            k = results[randint(0, len(results)) - 1][0]
+            if k.task_picture:
+                with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
+                    file.write(k.task_picture)
+                    photo[k.number] = 'static/img/t' + str(k.number) + '.png'
+            a.append(k)
+        return test('math', a, photo)
     return render_template('math_main.html')
 
 
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
+    global flag
     if request.method == 'POST':
         session = db_session.create_session()
         a = []
+        photo = {}
         for i in request.form.getlist('inf'):
             results = list(
                 session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == int(i))))
             k = results[randint(0, len(results)) - 1][0]
             if k.task_picture:
-                with open(k.task_picture, "rb") as image2string:
-                    conv_str = base64.b64encode(image2string.read())
-                k.task_picture = conv_str
-                session.merge(k)
-                session.commit()
+                with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
+                    file.write(k.task_picture)
+                    photo[k.number] = 'static/img/t' + str(k.number) + '.png'
             a.append(k)
-        return render_template('decision.html', lst=a, object='inf')
+        flag = False if flag else True
+        return test('inf', a, photo)
     return render_template('inf_main.html')
 
 
-@app.route('/decision/<obj>', methods=['GET', 'POST'])
-def decision(obj):
+@app.route('/decision_math')
+def decision_m():
     session = db_session.create_session()
-    if request.method == 'GET':
-        a = []
-        photo = {}
-        if obj == 'inf':
-            for i in range(1, 28):
-                results = list(
-                    session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == i)))
-                k = results[randint(0, len(results)) - 1][0]
-                if k.task_picture:
-                    with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
-                        file.write(k.task_picture)
-                        photo[k.number] = 'static/img/t' + str(k.number) + '.png'
-                a.append(k)
-        elif obj == 'math':
-            for i in range(1, 13):
-                results = list(
-                    session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == i)))
-                k = results[randint(0, len(results)) - 1][0]
-                if k.task_picture:
-                    with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
-                        file.write(k.task_picture)
-                        photo[k.number] = 'static/img/t' + str(k.number) + '.png'
-                a.append(k)
-        return render_template('decision.html', lst=a, object=obj, photo=photo)
-    elif request.method == 'POST':
-        res = []
-        summ = 0
+    a = []
+    photo = {}
+    for i in range(1, 13):
+        results = list(
+        session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == i)))
+        k = results[randint(0, len(results)) - 1][0]
+        if k.task_picture:
+            with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
+                file.write(k.task_picture)
+                photo[k.number] = 'static/img/t' + str(k.number) + '.png'
+        a.append(k)
+    return test('math', a, photo)
+
+
+@app.route('/decision_inf', methods=['GET', 'POST'])
+def decision_i():
+    session = db_session.create_session()
+    a = []
+    photo = {}
+    for i in range(1, 28):
+        results = list(
+            session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == i)))
+        k = results[randint(0, len(results)) - 1][0]
+        if k.task_picture:
+            with open('static/img/t' + str(k.number) + '.png', 'wb') as file:
+                file.write(k.task_picture)
+                photo[k.number] = 'static/img/t' + str(k.number) + '.png'
+        a.append(k)
+    request.method = 'GET'
+    while request.method == 'GET':
+        test('inf', a, photo)
+    return res('inf')
+
+
+def test(obj, a, photo):
+    return render_template('decision.html', lst=a, object=obj, photo=photo)
+
+
+def res(obj):
+    session = db_session.create_session()
+    res = []
+    summ = 0
+    if current_user.is_authenticated:
+        if obj == 'math':
+            query = session.query(__all_models.MathResults).filter(
+                __all_models.MathResults.login == current_user.login)
+            user = list(session.execute(query))[0][0]
+            task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
+                    '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12}
+        else:
+            query = session.query(__all_models.InfResults).filter(
+                __all_models.InfResults.login == current_user.login)
+            user = list(session.execute(query))[0][0]
+            task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
+                    '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12,
+                    '13': user.t13, '14': user.t14, '15': user.t15, '16': user.t16, '17': user.t17, '18': user.t18,
+                    '19': user.t19, '20': user.t20, '21': user.t21, '22': user.t22, '23': user.t23, '24': user.t24,
+                    '25': user.t25, '26': user.t26a, '27': user.t27a}
+    for i in request.form.keys():
+        a, b = i.split('_')
+        v = 1 if b == request.form[i] else 0
+        summ += v
+        res.append((a, v))
         if current_user.is_authenticated:
-            if obj == 'math':
-                query = session.query(__all_models.MathResults).filter(
-                    __all_models.MathResults.login == current_user.login)
-                user = list(session.execute(query))[0][0]
-                task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
-                        '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12}
-            else:
-                query = session.query(__all_models.InfResults).filter(
-                    __all_models.InfResults.login == current_user.login)
-                user = list(session.execute(query))[0][0]
-                task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
-                        '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12,
-                        '13': user.t13, '14': user.t14, '15': user.t15, '16': user.t16, '17': user.t17, '18': user.t18,
-                        '19': user.t19, '20': user.t20, '21': user.t21, '22': user.t22, '23': user.t23, '24': user.t24,
-                        '25': user.t25, '26': user.t26a, '27': user.t27a}
-        for i in request.form.keys():
-            a, b = i.split('_')
-            v = 1 if b == request.form[i] else 0
-            summ += v
-            res.append((a, v))
-            if current_user.is_authenticated:
-                k = task[a].split() + [str(v)]
-                task[a] = ' '.join(k)
-        if current_user.is_authenticated:
-            if (obj == 'math' and len(res) == 12) or (obj == 'inf' and len(res) == 27):
-                var = __all_models.Variant()
-                var.login = current_user.login
-                var.obj = obj
-                var.ball1 = summ
-                session.add(var)
-                session.commit()
-        return render_template('res.html', res=res, itog=summ)
+            k = task[a].split() + [str(v)]
+            task[a] = ' '.join(k)
+    if current_user.is_authenticated:
+        if (obj == 'math' and len(res) == 12) or (obj == 'inf' and len(res) == 27):
+            var = __all_models.Variant()
+            var.login = current_user.login
+            var.obj = obj
+            var.ball1 = summ
+            session.add(var)
+            session.commit()
+    return render_template('res.html', res=res, itog=summ)
 
 
 @app.route('/motivation')
