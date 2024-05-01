@@ -377,10 +377,8 @@ def res(obj):
         summ += v
         res.append((a, v))
         if current_user.is_authenticated:
-            print(task[a])
             k = task[a].split() + [str(v)]
             task[a] = ' '.join(k)
-            print(user.t1)
     if current_user.is_authenticated:
         if (obj == 'math' and len(res) == 12) or (obj == 'inf' and len(res) == 27):
             var = __all_models.Variant()
