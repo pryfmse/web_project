@@ -80,8 +80,8 @@
                     <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
                     <p class="lead">{{item.task_text}}</p>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text" name="{{ item.number }}_{{ item.answer }}">Ответ:</span>
-                        <textarea class="form-control"></textarea>
+                    <span class="input-group-text">Ответ:</span>
+                    <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
                     </div>
                     {% if object=='inf' and item.file %}
                     <a href="{{ item.file }}">Скачать файл</a><br>

@@ -257,6 +257,10 @@ def res_admin2():
 
 @app.route('/math_main', methods=['GET', 'POST'])
 def math_main():
+    global flag
+    if request.method == 'POST' and flag:
+        flag = False
+        return res('math')
     if request.method == 'POST':
         session = db_session.create_session()
         a = []
@@ -270,6 +274,7 @@ def math_main():
                     file.write(k.task_picture)
                     photo[k.number] = 'static/img/t' + str(k.number) + '.png'
             a.append(k)
+        flag = True
         return test('math', a, photo)
     return render_template('math_main.html')
 
@@ -277,6 +282,9 @@ def math_main():
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
     global flag
+    if request.method == 'POST' and flag:
+        flag = False
+        return res('inf')
     if request.method == 'POST':
         session = db_session.create_session()
         a = []
@@ -290,13 +298,17 @@ def inf_main():
                     file.write(k.task_picture)
                     photo[k.number] = 'static/img/t' + str(k.number) + '.png'
             a.append(k)
-        flag = False if flag else True
+        flag = True
         return test('inf', a, photo)
     return render_template('inf_main.html')
 
 
-@app.route('/decision_math')
+@app.route('/decision_math', methods=["GET", "POST"])
 def decision_m():
+    global flag
+    if request.method == 'POST' and flag:
+        flag = False
+        return res('math')
     session = db_session.create_session()
     a = []
     photo = {}
@@ -309,11 +321,16 @@ def decision_m():
                 file.write(k.task_picture)
                 photo[k.number] = 'static/img/t' + str(k.number) + '.png'
         a.append(k)
+    flag = True
     return test('math', a, photo)
 
 
 @app.route('/decision_inf', methods=['GET', 'POST'])
 def decision_i():
+    global flag
+    if request.method == 'POST' and flag:
+        flag = False
+        return res('inf')
     session = db_session.create_session()
     a = []
     photo = {}
@@ -326,10 +343,8 @@ def decision_i():
                 file.write(k.task_picture)
                 photo[k.number] = 'static/img/t' + str(k.number) + '.png'
         a.append(k)
-    request.method = 'GET'
-    while request.method == 'GET':
-        test('inf', a, photo)
-    return res('inf')
+    flag = True
+    return test('inf', a, photo)
 
 
 def test(obj, a, photo):
@@ -362,8 +377,10 @@ def res(obj):
         summ += v
         res.append((a, v))
         if current_user.is_authenticated:
+            print(task[a])
             k = task[a].split() + [str(v)]
             task[a] = ' '.join(k)
+            print(user.t1)
     if current_user.is_authenticated:
         if (obj == 'math' and len(res) == 12) or (obj == 'inf' and len(res) == 27):
             var = __all_models.Variant()
@@ -371,6 +388,7 @@ def res(obj):
             var.obj = obj
             var.ball1 = summ
             session.add(var)
+            session.add(user)
             session.commit()
     return render_template('res.html', res=res, itog=summ)
 
