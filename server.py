@@ -247,8 +247,10 @@ def res_admin2():
             if request.files['picture']:
                 f = request.files['picture']
                 task.task_picture = f.read()
-            task.file = request.form['file']
-            task.file2 = request.form['file2']
+            if request.form['file']:
+                task.file = request.form['file']
+            if request.form['file2']:
+                task.file2 = request.form['file2']
             task.answer = request.form['answer']
             session.add(task)
             session.commit()
