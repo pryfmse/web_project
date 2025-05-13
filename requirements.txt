@@ -1,30 +1,65 @@
-altgraph==0.17.4
-aniso8601==9.0.1
-bs4==0.0.2
-click
-colorama==0.4.6
-Flask
-Flask-Login
-Flask-RESTful==0.3.10
-Flask-WTF
-iniconfig
-Jinja2
-MarkupSafe
-packaging
-pefile
-pyinstaller
-pyinstaller-hooks-contrib==2023.10
-pytest
-pytz==2024.1
-pywin32-ctypes==0.2.2
-requests==2.31.0
-schedule==1.2.1
-screeninfo==0.8.1
-six==1.16.0
-soupsieve
-SQLAlchemy==2.0.29
-types-html5lib
-typing_extensions
-urllib3
-Werkzeug
-WTForms
+# Основные зависимости для работы приложения
+
+# Графические зависимости
+altgraph==0.17.4  # Утилиты для работы с графами зависимостей (используется PyInstaller)
+aniso8601==9.0.1  # Парсер для форматов даты/времени ISO 8601
+
+# Веб-скрапинг и обработка HTML
+bs4==0.0.2  # BeautifulSoup4 для парсинга HTML/XML
+soupsieve  # Вспомогательная библиотека для BeautifulSoup
+
+# CLI и цветной вывод
+click  # Фреймворк для создания CLI интерфейсов
+colorama==0.4.6  # Кроссплатформенный цветной вывод в консоль
+
+# Веб-фреймворк Flask и его расширения
+Flask  # Основной веб-фреймворк
+Flask-Login  # Аутентификация пользователей
+Flask-RESTful==0.3.10  # Создание REST API
+Flask-WTF  # Интеграция с WTForms для форм
+
+# Шаблонизация
+Jinja2  # Система шаблонов
+MarkupSafe  # Безопасная обработка строк для шаблонов
+
+# Тестирование
+pytest  # Фреймворк для тестирования
+iniconfig  # Чтение файлов .ini (используется pytest)
+
+# Работа с датой/временем
+pytz==2024.1  # Поддержка временных зон
+
+# Создание исполняемых файлов
+pyinstaller  # Упаковка Python-приложений в exe
+pyinstaller-hooks-contrib==2023.10  # Дополнительные хуки для PyInstaller
+pefile  # Анализ PE-файлов (используется PyInstaller)
+
+# Работа с Windows
+pywin32-ctypes==0.2.2  # Альтернатива pywin32
+
+# HTTP-запросы
+requests==2.31.0  # HTTP-библиотека
+urllib3  # Низкоуровневая HTTP-библиотека
+
+# Планирование задач
+schedule==1.2.1  # Планировщик задач
+
+# Информация о дисплеях
+screeninfo==0.8.1  # Получение информации о мониторах
+
+# Совместимость Python 2/3
+six==1.16.0  # Утилиты для совместимости версий Python
+
+# Базы данных
+SQLAlchemy==2.0.29  # ORM и работа с БД
+
+# Аннотации типов
+typing_extensions  # Поддержка новых возможностей типизации
+types-html5lib  # Аннотации типов для html5lib
+
+# Формы
+WTForms  # Валидация и обработка форм
+
+# Утилиты
+packaging  # Работа с версиями пакетов
+Werkzeug  # WSGI утилиты (используется Flask)

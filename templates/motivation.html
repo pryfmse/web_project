@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Основные мета-данные и подключение стилей -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS (версия 4.4.1) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Подключение Bootstrap JS (версия 5.3.2) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <title>ЕГЭ</title>
-    <style>
 
+    <!-- Подключение пользовательского CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+    <!-- Заголовок страницы в браузере -->
+    <title>ЕГЭ</title>
+
+    <!-- Встроенные стили для текущей страницы -->
+    <style>
         .center {
             padding-left: 300px;
             padding-right:300px;
@@ -22,17 +32,22 @@
             max-width: 100%;
             height: auto;
         }
-
     </style>
 </head>
 <body>
+
+<!-- Шапка сайта с меню навигации -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">ЕГЭ</a>
+
+        <!-- Кнопка сворачивания меню для мобильных устройств -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Блок меню навигации -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -45,20 +60,26 @@
                     <a class="nav-link" href="/inf_main">Информатика</a>
                 </li>
             </ul>
+
+            <!-- Ссылка на профиль -->
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/enter"><img src="static/img/профиль.png" alt="Профиль"></a>
             </form>
         </div>
     </nav>
+
+    <!-- Основной контент страницы -->
     <main class="container">
+        <!-- Приветственный блок -->
         <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
             <div class="col-lg-6 px-0">
                 <h1 class="display-4 fst-italic">Верь в себя и продолжай работать</h1>
                 <p class="lead my-3">Воспринимай экзамены как вызов, который поможет развить твою стрессоустойчивость и
-                    стремление к достижениям..</p>
+                    стремление к достижениям.</p>
             </div>
         </div>
 
+        <!-- Карточка "Когда нет сил" -->
         <div class="row mb-2">
             <div class="col-md-6">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -82,47 +103,36 @@
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
                              role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                             focusable="false"><title>Placeholder</title>
+                             focusable="false">
+                            <title>Placeholder</title>
                         </svg>
                         <img src="static/img/XAuUxY7mL74.jpg" alt="">
                     </div>
                 </div>
             </div>
+
+            <!-- Карточка "Если не знаешь, что делать" -->
             <div class="col-md-6">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
                         <strong class="d-inline-block mb-2 text-success-emphasis">Если не знаешь, что делать</strong>
                         <h3 class="mb-0">Следуй плану</h3><br>
-                        <p class="mb-auto"><strong>Поставь конкретные цели:</strong><br><br>
-
-                            Попробуй разбить подготовку на конкретные этапы и установи себе ясные цели для каждого из
-                            них. Например, "завершить изучение определенной темы к определенной дате" или "выучить
-                            определенное количество новых слов каждый день".<br><br>
-
+                        <p class="mb-auto">
+                            <strong>Поставь конкретные цели:</strong><br><br>
+                            Попробуй разбить подготовку на конкретные этапы и установи себе ясные цели для каждого из них.<br><br>
 
                             <strong>Постоянно напоминай себе свои успехи:</strong><br><br>
-
-                            Не забывай о том, насколько далеко ты уже продвинулся. Представь себя на день экзамена,
-                            когда ты успешно ответишь на вопросы, которые тебя сейчас беспокоят. Подумай о том, какой
-                            результат ты хочешь достичь, и представь себе, как это будет здорово.<br><br>
-
+                            Не забывай о том, насколько далеко ты уже продвинулся.<br><br>
 
                             <strong>Заботься о себе:</strong><br><br>
-
-                            Не забывай об отдыхе, физической активности и здоровом питании. Регулярные перерывы помогут
-                            тебе удерживать концентрацию и сохранять энергию для изучения.<br><br>
-
+                            Не забывай об отдыхе, физической активности и здоровом питании.<br><br>
 
                             <strong>Найди поддержку:</strong><br><br>
-
-                            Общайся с друзьями, семьей или коллегами, которые могут поддержать тебя в этот период.
-                            Иногда обсуждение материала с кем-то другим может помочь улучшить понимание темы.<br><br>
-
+                            Общайся с друзьями, семьей или коллегами, которые могут поддержать тебя.<br><br>
 
                             <strong>Верь в себя:</strong><br><br>
-
-                            Не забывай, что ты способен на большее, чем ты можешь себе представить. Трудности подготовки
-                            к экзаменам временны, но твои знания и умения будут с тобой надолго.</p>
+                            Не забывай, что ты способен на большее, чем ты можешь себе представить.
+                        </p>
                         <a href="https://ru.wikihow.com/правильно-планировать-время-старшекласснику"
                            class="icon-link gap-1 icon-link-hover stretched-link">
                             Ещё
@@ -134,7 +144,8 @@
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
                              role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                             focusable="false"><title>Placeholder</title>
+                             focusable="false">
+                            <title>Placeholder</title>
                         </svg>
                         <img src="static/img/2570267260.jpg" alt="">
                     </div>
@@ -143,7 +154,8 @@
         </div>
     </main>
 </header>
-</body>
+
+<!-- Подвал сайта -->
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -154,4 +166,5 @@
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>

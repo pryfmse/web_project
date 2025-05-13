@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Основные мета-данные и подключение стилей -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS для стилизации интерфейса -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <style type="text/css">
 
+    <!-- Подключение пользовательского CSS-файла -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+    <!-- Встроенные стили для текущей страницы -->
+    <style type="text/css">
         .pad {
             padding-left: 400px;
             padding-right: 400px
@@ -15,18 +21,25 @@
         .center{
             padding-left: 660px
         }
-
     </style>
+
+    <!-- Заголовок страницы -->
     <title>Вход</title>
 </head>
 <body>
+
+<!-- Шапка сайта с навигационным меню -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">ЕГЭ</a>
+
+        <!-- Кнопка для сворачивания меню на мобильных устройствах -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Навигационное меню -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -39,40 +52,62 @@
                     <a class="nav-link" href="/inf_main">Информатика</a>
                 </li>
             </ul>
+
+            <!-- Форма поиска или ссылка на профиль -->
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
             </form>
         </div>
     </nav>
+
+    <!-- Заголовок страницы входа -->
     <br>
     <h1 class="display-4" align=center>Вход</h1>
+
+    <!-- Форма авторизации -->
     <form class='pad' method="post">
         <div class="form-group">
             <br>
+            <!-- Поле ввода логина -->
             <input class="form-control" id="login" name="login" placeholder="Логин">
+            <!-- Поле ввода пароля -->
             <input type="password" class="form-control" name="password" id="password" placeholder="Пароль">
-            <br></div>
+            <br>
+        </div>
+
+        <!-- Кнопка отправки формы (Войти) -->
         <button type="submit" class="btn btn-primary btn-lg btn-block">Войти</button>
 
+        <!-- Ссылка на регистрацию -->
         <a type="button" href="/reg_user" class="btn btn-secondary btn-lg btn-block">Регистрация</a>
+
+        <!-- Сообщение об ошибке (если есть) -->
         {% if mess %}
         <br>
         <div class="alert alert-dark" role="alert"> {{mess}}</div>
         {% endif %}
     </form>
 </header>
-</body>
+
+<!-- Пустые строки для отступа внизу -->
 <br><br><br><br><br><br><br><br>
+
+<!-- Разделитель -->
 <div class="b-example-divider"></div>
 
+<!-- Подвал сайта -->
 <div class="container">
     <footer class="py-3 my-4">
+        <!-- Навигация в подвале -->
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Главная</a></li>
             <li class="nav-item"><a href="/motivation" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
             <li class="nav-item"><a href="/lifehack" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
         </ul>
+
+        <!-- Текст копирайта -->
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>
