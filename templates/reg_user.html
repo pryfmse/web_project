@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Основные мета-данные и подключение стилей -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS (версия 4.4.1) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <style type="text/css">
 
+    <!-- Подключение пользовательского CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+    <!-- Встроенные стили для текущей страницы -->
+    <style type="text/css">
         .pad {
             padding-left: 400px;
             padding-right: 400px
@@ -15,18 +21,25 @@
         .center{
             vertical-align: center
         }
-
     </style>
+
+    <!-- Заголовок страницы в браузере -->
     <title>Регистрация</title>
 </head>
 <body>
+
+<!-- Шапка сайта с меню навигации -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">ЕГЭ</a>
+
+        <!-- Кнопка сворачивания меню для мобильных устройств -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Блок меню навигации -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -39,26 +52,42 @@
                     <a class="nav-link" href="/inf_main">Информатика</a>
                 </li>
             </ul>
+
+            <!-- Ссылка на профиль -->
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
             </form>
         </div>
     </nav>
+
+    <!-- Заголовок страницы регистрации -->
     <br>
     <h1 class="display-4" align=center>Регистрация</h1>
+
+    <!-- Кнопки выбора типа регистрации -->
     <div style="text-align:center">
         <a type="button" href="/reg_user" class="btn btn-secondary active">Пользователю</a>
         <a type="button" href="/reg_admin" class="btn btn-secondary">Администратору</a>
     </div>
+
+    <!-- Форма регистрации пользователя -->
     <form class='pad' method="post" enctype="multipart/form-data">
         <div class="form-group">
             <br>
+            <!-- Поле ввода логина -->
             <input class="form-control" name="login" placeholder="Логин">
+            <!-- Поле ввода пароля -->
             <input type="password" class="form-control" name="password" placeholder="Пароль">
         </div>
+
+        <!-- Кнопка отправки формы -->
         <button type="submit" class="btn btn-primary btn-lg btn-block">Зарегистрироваться</button>
+
+        <!-- Ссылка на вход -->
         <br>
         <a href="/enter" type="button" class="btn btn-secondary btn-lg btn-block">Вход</a>
+
+        <!-- Сообщение об ошибке (если есть) -->
         {% if mess %}
         <br>
         <div class="alert alert-dark" role="alert"> {{mess}}</div>
@@ -66,10 +95,12 @@
     </form>
 
 </header>
-</body>
+
+<!-- Разделитель -->
 <br><br>
 <div class="b-example-divider"></div>
 
+<!-- Подвал сайта -->
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -80,4 +111,5 @@
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>

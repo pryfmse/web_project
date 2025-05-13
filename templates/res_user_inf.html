@@ -1,51 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Основные мета-данные и подключение стилей -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS (версия 4.4.1) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
- google.charts.load('current', {'packages':['corechart']});
- google.charts.setOnLoadCallback(drawChart);
- function drawChart() {
- const data = google.visualization.arrayToDataTable([
- ['Task', 'Средний показатель в процентах'],
- {% for i in range(25) %}
-        [{{i + 1}}, {{user[i]}}],
-        {% endfor %}
-        ['26a', {{user[25]}}],
-        ['26b', {{user[26]}}],
-        ['27a', {{user[27]}}],
-        ['27b', {{user[28]}}]
-        ]);
- const options = {
- title: 'Успеваемость',
- curveType: 'function',
- legend: { position: 'bottom' }
- };
- const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
- chart.draw(data, options);
- }
 
+    <!-- Подключение пользовательского CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+    <!-- Подключение Google Charts для построения графика -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Скрипт отрисовки линейного графика успеваемости -->
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            const data = google.visualization.arrayToDataTable([
+                ['Task', 'Средний показатель в процентах'],
+                {% for i in range(25) %}
+                [{{i + 1}}, {{user[i]}}],
+                {% endfor %}
+                ['26a', {{user[25]}}],
+                ['26b', {{user[26]}}],
+                ['27a', {{user[27]}}],
+                ['27b', {{user[28]}}]
+            ]);
+            const options = {
+                title: 'Успеваемость',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+            const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            chart.draw(data, options);
+        }
     </script>
+
+    <!-- Встроенные стили для текущей страницы -->
     <style>
         .center{
             padding-left: 650px
         }
-
     </style>
+
+    <!-- Заголовок страницы в браузере -->
     <title>Результаты</title>
 </head>
 <body>
+
+<!-- Навигационное меню -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#">ЕГЭ</a>
+
+    <!-- Кнопка сворачивания меню для мобильных устройств -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Блок меню навигации -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -58,25 +75,42 @@
                 <a class="nav-link" href="/inf_main">Информатика</a>
             </li>
         </ul>
+
+        <!-- Ссылка на профиль -->
         <form class="form-inline mt-2 mt-md-0">
             <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
         </form>
     </div>
 </nav>
+
+<!-- Приветствие и имя пользователя -->
 <h1 class="display-4" align=center>Профиль: {{prof}}</h1>
+
 <br>
+
+<!-- Кнопки выбора предмета (математика / информатика) -->
 <div class="btn-group center" role="group" aria-label="Basic example">
     <a type="button" href="/res_user_math" class="btn btn-secondary">Математика</a>
     <a type="button" href="/res_user_inf" class="btn btn-secondary active">Информатика</a>
-    <br>
 </div>
-<br> <br> <br>
+
+<br><br><br>
+
+<!-- Блок для отображения графика успеваемости -->
 <div id="curve_chart" style="width: 100%; height: 500px"></div>
-</body>
+
+<!-- Прогноз результатов ЕГЭ -->
 <h2 align=center>Прогноз: {{n_1}} первичных баллов ({{n_2}} вторичных баллов)</h2>
-<br> <br><a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a><br><br>
+
+<!-- Кнопка выхода из аккаунта -->
+<br> <br>
+<a type="button" href="/logout" class="btn btn-secondary btn-lg btn-block">Выйти из аккаунта</a>
+<br><br>
+
+<!-- Разделитель -->
 <div class="b-example-divider"></div>
 
+<!-- Подвал сайта -->
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -87,4 +121,5 @@
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>

@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Мета-информация и настройки страницы -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Подключение Bootstrap JS Bundle (включая Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
+
+    <!-- Подключение пользовательских стилей -->
     <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
     <title>ЕГЭ</title>
-    <style>
 
+    <!-- Встроенные стили -->
+    <style>
+        /* Центрирование контента с отступами */
         .center {
             padding-left: 300px;
-            padding-right:300px;
+            padding-right: 300px;
             padding-top: 50px;
-            padding-bottom:50px
+            padding-bottom: 50px
         }
+
+        /* Адаптивные изображения */
         img {
             max-width: 100%;
             height: auto;
         }
-
     </style>
 </head>
 <body>
+<!-- Шапка сайта с навигацией -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <!-- Логотип/название сайта -->
         <a class="navbar-brand" href="#">ЕГЭ</a>
+
+        <!-- Кнопка для мобильного меню -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Основное меню навигации -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -45,72 +61,87 @@
                     <a class="nav-link" href="/inf_main">Информатика</a>
                 </li>
             </ul>
+
+            <!-- Кнопка входа/профиля -->
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/enter"><img src="static/img/профиль.png" alt="Профиль"></a>
             </form>
         </div>
     </nav>
+
+    <!-- Основная форма с заданиями -->
     <form class='pad' method="post" enctype="multipart/form-data">
         {% for item in lst %}
-        {% if not item.number in photo.keys() %}
-        <div class="px-4 pt-5 my-5 text-center border-bottom">
-            <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">{{item.task_text}}</p>
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text">Ответ:</span>
-                    <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
-                </div>
-            </div>
-            {% if object=='inf' and item.file %}
-            <a href="{{ item.file }}">Скачать файл</a><br>
-            {% endif %}
-            {% if object=='inf' and item.file2 %}
-            <a href="{{ item.file2 }}">Скачать файл</a>
-            {% endif %}
-        </div>
-        {% else %}
-        <div class="b-example-divider"></div>
-        <div class="container col-xxl-8 px-4 py-5">
-            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                <div class="col-10 col-sm-8 col-lg-6">
-                    <img src="{{ photo[item.number] }}" alt="{{ photo[item.number] }}">
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
-                    <p class="lead">{{item.task_text}}</p>
+            <!-- Вариант отображения задания БЕЗ изображения -->
+            {% if not item.number in photo.keys() %}
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">{{item.task_text}}</p>
                     <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text">Ответ:</span>
-                    <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
+                        <span class="input-group-text">Ответ:</span>
+                        <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
                     </div>
-                    {% if object=='inf' and item.file %}
-                    <a href="{{ item.file }}">Скачать файл</a><br>
-                    {% endif %}
-                    {% if object=='inf' and item.file2 %}
-                    <a href="{{ item.file2 }}">Скачать файл</a>
-                    {% endif %}
+                </div>
+                <!-- Ссылки на файлы (только для информатики) -->
+                {% if object=='inf' and item.file %}
+                <a href="{{ item.file }}">Скачать файл</a><br>
+                {% endif %}
+                {% if object=='inf' and item.file2 %}
+                <a href="{{ item.file2 }}">Скачать файл</a>
+                {% endif %}
+            </div>
+
+            <!-- Вариант отображения задания С изображением -->
+            {% else %}
+            <div class="b-example-divider"></div>
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                    <!-- Блок с изображением (справа) -->
+                    <div class="col-10 col-sm-8 col-lg-6">
+                        <img src="{{ photo[item.number] }}" alt="{{ photo[item.number] }}">
+                    </div>
+
+                    <!-- Блок с текстом задания (слева) -->
+                    <div class="col-lg-6">
+                        <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Задание {{item.number}}</h2>
+                        <p class="lead">{{item.task_text}}</p>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text">Ответ:</span>
+                            <input class="form-control" name="{{ item.number }}_{{ item.answer }}">
+                        </div>
+                        <!-- Ссылки на файлы (только для информатики) -->
+                        {% if object=='inf' and item.file %}
+                        <a href="{{ item.file }}">Скачать файл</a><br>
+                        {% endif %}
+                        {% if object=='inf' and item.file2 %}
+                        <a href="{{ item.file2 }}">Скачать файл</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
+            {% endif %}
         {% endfor %}
-        <button type="submit" href="#" class="btn btn-secondary btn-lg btn-block">Отправить ответы</button>
+
+        <!-- Кнопка отправки формы -->
+        <input type="submit" value="Отправить ответы" class="btn btn-secondary btn-lg btn-block">
+        <br><br>
         <br><br>
     </form>
-
 </header>
 
-</body>
+<!-- Подвал сайта -->
 <div class="b-example-divider"></div>
 
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Главная</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
+            <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Главная</a></li>
+            <li class="nav-item"><a href="/motivation" class="nav-link px-2 text-body-secondary">Поддержка</a></li>
+            <li class="nav-item"><a href="/lifehack" class="nav-link px-2 text-body-secondary">Лайфхаки</a></li>
         </ul>
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>

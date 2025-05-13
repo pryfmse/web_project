@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Основные мета-данные и подключение стилей -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключение Bootstrap CSS (версия 4.4.1) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <style type="text/css">
 
+    <!-- Подключение пользовательского CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+    <!-- Встроенные стили для текущей страницы -->
+    <style type="text/css">
         .pad {
             padding-left: 400px;
             padding-right: 400px
@@ -15,18 +21,25 @@
         .center{
             padding-left: 660px
         }
-
     </style>
+
+    <!-- Заголовок страницы в браузере -->
     <title>Математика</title>
 </head>
 <body>
+
+<!-- Шапка сайта с меню навигации -->
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <a class="navbar-brand" href="#">ЕГЭ</a>
+
+        <!-- Кнопка сворачивания меню для мобильных устройств -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Блок меню навигации -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -39,11 +52,15 @@
                     <a class="nav-link" href="/inf_main">Информатика</a>
                 </li>
             </ul>
+
+            <!-- Ссылка на профиль -->
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/enter"><img src="static/img/профиль.png" alt="Иконка"></a>
             </form>
         </div>
     </nav>
+
+    <!-- Приветственный блок с описанием -->
     <div class="p-5 mb-4 bg-dark border rounded-3">
         <div class="container-fluid py-5">
             <h1 class="display-5 text-light fw-bold">Начните заниматься</h1>
@@ -53,8 +70,13 @@
         </div>
     </div>
 </header>
+
+<!-- Форма выбора заданий по математике -->
 <form method="post">
-    <div class="d-flex flex-column flex-md-row p-4 gap-4  align-items-center justify-content-center">
+    <!-- Контейнер для чекбоксов -->
+    <div class="d-flex flex-column flex-md-row p-4 gap-4 align-items-center justify-content-center">
+
+        <!-- Блок первых трёх заданий -->
         <div class="list-group">
             <label class="list-group-item d-flex gap-2">
                 <input class="form-check-input flex-shrink-0" type="checkbox" name="math" value="1">
@@ -78,6 +100,8 @@
       </span>
             </label>
         </div>
+
+        <!-- Блок заданий 4–6 -->
         <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
             <div class="list-group">
                 <label class="list-group-item d-flex gap-2">
@@ -102,6 +126,8 @@
       </span>
                 </label>
             </div>
+
+            <!-- Блок заданий 7–9 -->
             <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
                 <div class="list-group">
                     <label class="list-group-item d-flex gap-2">
@@ -126,6 +152,8 @@
       </span>
                     </label>
                 </div>
+
+                <!-- Блок заданий 10–12 -->
                 <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
                     <div class="list-group">
                         <label class="list-group-item d-flex gap-2">
@@ -145,7 +173,7 @@
                         <label class="list-group-item d-flex gap-2">
                             <input class="form-check-input flex-shrink-0" type="checkbox" name="math" value="12">
                             <span>
-        12. Наибольше, наименьшее значение функции
+        12. Наибольшее, наименьшее значение функции
         <small class="d-block text-body-secondary">Исследование функции</small>
       </span>
                         </label>
@@ -154,12 +182,16 @@
             </div>
         </div>
     </div>
+
+    <!-- Кнопка отправки формы -->
     <input type="submit" value="Начать" class="btn btn-secondary btn-lg btn-block">
 </form>
-</body>
+
+<!-- Разделитель -->
 <br><br>
 <div class="b-example-divider"></div>
 
+<!-- Подвал сайта -->
 <div class="container">
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -170,4 +202,5 @@
         <p class="text-center text-body-secondary">&copy; Чем больше работаешь - тем выше результат</p>
     </footer>
 </div>
+</body>
 </html>
