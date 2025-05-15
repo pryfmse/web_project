@@ -1,55 +1,48 @@
 from random import randint
 
-from sqlalchemy import text, insert
+import sqlalchemy
+from sqlalchemy.dialects.sqlite import insert
 from flask_login import login_required, logout_user, LoginManager, login_user, current_user
-from flask import Flask, render_template, request, redirect, url_for
-from data import __all_models, db_session  # Импорт моделей и сессии БД
 
-# Создание экземпляра Flask-приложения
+from flask import Flask, render_template, request, redirect, url_for
+from data import __all_models, db_session
+
 app = Flask(__name__)
-# Установка секретного ключа для защиты сессий
 app.config['SECRET_KEY'] = 'secret_key'
 
-# Инициализация менеджера входа
 login_manager = LoginManager()
 login_manager.init_app(app)
+trans_inf = {0: 0, 1: 7, 2: 14, 3: 20, 4: 27, 5: 34, 6: 40, 7: 43, 8: 46, 9: 48, 10: 51, 11: 54, 12: 56,
+             13: 59, 14: 62, 15: 64, 16: 67, 17: 70, 18: 72, 19: 75, 20: 78, 21: 80, 22: 83, 23: 85,
+             24: 88, 25: 90, 26: 93, 27: 95, 28: 98, 29: 100}
+trans_math = {0: 0, 1: 6, 2: 11, 3: 17, 4: 22, 5: 27, 6: 34, 7: 40, 8: 46, 9: 52, 10: 58, 11: 64, 12: 70}
 
-# Словарь соответствия количества правильных ответов по информатике к баллам
-trans_inf = {0: 0, 1: 7, 2: 14, 3: 20, 4: 27, 5: 34, 6: 40, 7: 43, 8: 46, 9: 48,
-             10: 51, 11: 54, 12: 56, 13: 59, 14: 62, 15: 64, 16: 67, 17: 70, 18: 72,
-             19: 75, 20: 78, 21: 80, 22: 83, 23: 85, 24: 88, 25: 90, 26: 93, 27: 95,
-             28: 98, 29: 100}
 
-# Словарь соответствия количества правильных ответов по математике к баллам
-trans_math = {0: 0, 1: 6, 2: 11, 3: 17, 4: 22, 5: 27, 6: 34, 7: 40, 8: 46, 9: 52,
-              10: 58, 11: 64, 12: 70}
-
-# Загрузчик пользователя для Flask-Login
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
-    query = db_sess.query(__all_models.Reg).filter((__all_models.Reg.id) == text(user_id))
+    query = db_sess.query(__all_models.Reg).filter(__all_models.Reg.id == sqlalchemy.text(user_id))
     results = list(db_sess.execute(query))[0][0]
     return results
 
-# Маршрут выхода из аккаунта
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect("/")
 
-# Главная страница сайта
+
 @app.route('/')
 def index():
     return render_template('main.html')
 
-# Регистрация обычного пользователя
+
 @app.route('/reg_user', methods=['POST', 'GET'])
 def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
-    else:
+    elif request.method == 'POST':
         session = db_session.create_session()
         for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
             return render_template('reg_user.html', mess='Этот пользователь уже зарегистрирован')
@@ -62,6 +55,7 @@ def reg_user():
         user.login = request.form['login']
         user.password = request.form['password']
         user.status = 'user'
+
         session.add(user)
         session.add(user_inf)
         session.add(user_math)
@@ -69,12 +63,12 @@ def reg_user():
         login_user(user)
         return redirect(f'/res_user_inf')
 
-# Регистрация администратора (требуется секретный ключ)
+
 @app.route('/reg_admin', methods=['POST', 'GET'])
 def reg_admin(mess=False):
     if request.method == 'GET':
         return render_template('reg_admin.html', mess=mess)
-    else:
+    elif request.method == 'POST':
         if request.form['key'] == app.config['SECRET_KEY']:
             session = db_session.create_session()
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
@@ -83,6 +77,7 @@ def reg_admin(mess=False):
             user.login = request.form['login']
             user.password = request.form['password']
             user.status = 'admin'
+
             session.add(user)
             session.commit()
             login_user(user)
@@ -90,7 +85,7 @@ def reg_admin(mess=False):
         else:
             return render_template('reg_admin.html', mess='Неверный ключ')
 
-# Вход в систему
+
 @app.route('/enter', methods=['POST', 'GET'])
 def enter(mess=False):
     if current_user.is_authenticated:
@@ -101,7 +96,7 @@ def enter(mess=False):
     else:
         if request.method == 'GET':
             return render_template('enter.html', mess=mess)
-        else:
+        elif request.method == 'POST':
             session = db_session.create_session()
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
                                                             __all_models.Reg.password == request.form['password']):
@@ -114,7 +109,7 @@ def enter(mess=False):
             else:
                 return render_template('enter.html', mess='Не удалось войти')
 
-# Отображение результатов тестирования по информатике у текущего пользователя
+
 @app.route('/res_user_inf')
 def res_user_inf():
     db_sess = db_session.create_session()
@@ -132,7 +127,7 @@ def res_user_inf():
     n = len(list(filter(lambda x: x >= 70, results)))
     return render_template('res_user_inf.html', user=results, n_1=n, n_2=trans_inf[n], prof=current_user.login)
 
-# Отображение результатов тестирования по математике у текущего пользователя
+
 @app.route('/res_user_math')
 def res_user_math():
     db_sess = db_session.create_session()
@@ -146,7 +141,7 @@ def res_user_math():
     n = len(list(filter(lambda x: x >= 70, results)))
     return render_template('res_user_math.html', user=results, n_1=n, n_2=trans_math[n], prof=current_user.login)
 
-# Панель управления администратором (математика)
+
 @app.route('/res_admin_math', methods=['POST', 'GET'])
 def res_admin1():
     session = db_session.create_session()
@@ -195,7 +190,7 @@ def res_admin1():
                                                                                             0, 0, 0, 0, 0, 0,
                                                                                             0])
 
-# Панель управления администратором (информатика)
+
 @app.route('/res_admin_inf', methods=['POST', 'GET'])
 def res_admin2():
     session = db_session.create_session()
@@ -214,10 +209,8 @@ def res_admin2():
             if request.files['picture']:
                 f = request.files['picture']
                 task.task_picture = f.read()
-            if request.form['file']:
-                task.file = request.form['file']
-            if request.form['file2']:
-                task.file2 = request.form['file2']
+            task.file = request.form['file']
+            task.file2 = request.form['file2']
             task.answer = request.form['answer']
             session.add(task)
             session.commit()
@@ -254,33 +247,33 @@ def res_admin2():
                                                                                            0, 0, 0, 0, 0, 0, 0,
                                                                                            0, 0, 0, 0, 0, 0, 0, 0])
 
-# Выбор заданий по математике
+
 @app.route('/math_main', methods=['GET', 'POST'])
 def math_main():
     if request.method == "GET":
         return render_template('math_main.html')
-    else:
+    if request.method == 'POST':
         return redirect(url_for('test', obj="math", tasks=" ".join(request.form.getlist('math'))))
 
-# Выбор заданий по информатике
+
 @app.route('/inf_main', methods=['GET', 'POST'])
 def inf_main():
     if request.method == 'GET':
         return render_template('inf_main.html')
-    else:
+    elif request.method == 'POST':
         return redirect(url_for('test', obj="inf", tasks=" ".join(request.form.getlist('inf'))))
 
-# Автоматический выбор всех заданий по математике
+
 @app.route('/decision_math', methods=['GET', 'POST'])
 def decision_m():
     return redirect(url_for('test', obj="math", tasks=" ".join(list(map(str, list(range(1, 13)))))))
 
-# Автоматический выбор всех заданий по информатике
+
 @app.route('/decision_inf', methods=['GET', 'POST'])
 def decision_i():
     return redirect(url_for('test', obj="inf", tasks=" ".join(list(map(str, list(range(1, 28)))))))
 
-# Генерация теста
+
 @app.route('/test', methods=['GET', 'POST'])
 def test():
     if request.method == 'GET':
@@ -310,14 +303,14 @@ def test():
                         photo[k.number] = 'static/img/t' + str(k.number) + '.png'
                 a.append(k)
         return render_template('decision.html', lst=a, object=obj, photo=photo)
-    else:
+    elif request.method == 'POST':
         obj = request.args.get('obj')
         answers = ''
         for i in request.form.keys():
             answers += i + "!" + request.form[i] + "/"
         return redirect(url_for('res', obj=obj, answers=answers))
 
-# Обработка результатов тестирования
+
 @app.route("/res")
 def res():
     session = db_session.create_session()
@@ -340,7 +333,6 @@ def res():
             query = session.query(__all_models.InfResults).filter(
                 __all_models.InfResults.login == current_user.login)
             user = list(session.execute(query))[0][0]
-            print(user)
             task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
                     '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12,
                     '13': user.t13, '14': user.t14, '15': user.t15, '16': user.t16, '17': user.t17, '18': user.t18,
@@ -362,32 +354,43 @@ def res():
                 obj='inf',
                 ball1=summ
             )
+
+            # Указываем, что делать при конфликте (обновить поля obj и ball1)
             stmt = stmt.on_conflict_do_update(
-                index_elements=['login'],
+                index_elements=['login'],  # Уникальная колонка
                 set_={
-                    'obj': stmt.excluded.obj,
+                    'obj': stmt.excluded.obj,  # Берем значение из вставляемой строки
                     'ball1': stmt.excluded.ball1
                 }
             )
             session.execute(stmt)
             session.commit()
+
+
+            # var = __all_models.Variant()
+            # var.login = current_user.login
+            # var.obj = obj
+            # var.ball1 = summ
+            # session.add(var)
+            # session.add(user)
+            # session.commit()
     return render_template('res.html', res=res, itog=summ)
 
-# Мотивационная страница
+
 @app.route('/motivation')
 def mot():
     return render_template('motivation.html')
 
-# Полезные советы
+
 @app.route('/lifehack')
 def lifeh():
     return render_template('lifeh.html')
 
-# Функция запуска приложения
+
 def main():
     db_session.global_init("db/data.db")
     app.run()
 
-# Точка входа
+
 if __name__ == '__main__':
     main()
