@@ -260,7 +260,7 @@ def math_main():
     if request.method == "GET":
         return render_template('math_main.html')
     else:
-        return redirect(url_for('test', obj="inf", tasks=" ".join(request.form.getlist('math'))))
+        return redirect(url_for('test', obj="math", tasks=" ".join(request.form.getlist('math'))))
 
 # Выбор заданий по информатике
 @app.route('/inf_main', methods=['GET', 'POST'])
@@ -340,6 +340,7 @@ def res():
             query = session.query(__all_models.InfResults).filter(
                 __all_models.InfResults.login == current_user.login)
             user = list(session.execute(query))[0][0]
+            print(user)
             task = {'1': user.t1, '2': user.t2, '3': user.t3, '4': user.t4, '5': user.t5, '6': user.t6,
                     '7': user.t7, '8': user.t8, '9': user.t9, '10': user.t10, '11': user.t11, '12': user.t12,
                     '13': user.t13, '14': user.t14, '15': user.t15, '16': user.t16, '17': user.t17, '18': user.t18,
