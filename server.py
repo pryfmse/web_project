@@ -42,7 +42,7 @@ def index():
 def reg_user():
     if request.method == 'GET':
         return render_template('reg_user.html')
-    elif request.method == 'POST':
+    else:
         session = db_session.create_session()
         for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
             return render_template('reg_user.html', mess='Этот пользователь уже зарегистрирован')
@@ -68,7 +68,7 @@ def reg_user():
 def reg_admin(mess=False):
     if request.method == 'GET':
         return render_template('reg_admin.html', mess=mess)
-    elif request.method == 'POST':
+    else:
         if request.form['key'] == app.config['SECRET_KEY']:
             session = db_session.create_session()
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login']):
@@ -91,12 +91,12 @@ def enter(mess=False):
     if current_user.is_authenticated:
         if current_user.status == 'user':
             return redirect('/res_user_inf')
-        elif current_user.status == 'admin':
+        else:
             return redirect('/res_admin_inf')
     else:
         if request.method == 'GET':
             return render_template('enter.html', mess=mess)
-        elif request.method == 'POST':
+        else:
             session = db_session.create_session()
             for _ in session.query(__all_models.Reg).filter(__all_models.Reg.login == request.form['login'],
                                                             __all_models.Reg.password == request.form['password']):
@@ -252,7 +252,7 @@ def res_admin2():
 def math_main():
     if request.method == "GET":
         return render_template('math_main.html')
-    if request.method == 'POST':
+    else:
         return redirect(url_for('test', obj="math", tasks=" ".join(request.form.getlist('math'))))
 
 
@@ -260,7 +260,7 @@ def math_main():
 def inf_main():
     if request.method == 'GET':
         return render_template('inf_main.html')
-    elif request.method == 'POST':
+    else:
         return redirect(url_for('test', obj="inf", tasks=" ".join(request.form.getlist('inf'))))
 
 
@@ -303,7 +303,7 @@ def test():
                         photo[k.number] = 'static/img/t' + str(k.number) + '.png'
                 a.append(k)
         return render_template('decision.html', lst=a, object=obj, photo=photo)
-    elif request.method == 'POST':
+    else:
         obj = request.args.get('obj')
         answers = ''
         for i in request.form.keys():
