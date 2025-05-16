@@ -7,8 +7,6 @@ from flask_login import login_required, logout_user, LoginManager, login_user, c
 from flask import Flask, render_template, request, redirect, url_for
 from data import __all_models, db_session
 
-import configs.flask_config
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 
@@ -279,7 +277,6 @@ def decision_i():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    print("test")
     if request.method == 'GET':
         obj = request.args.get('obj')
         tasks = (request.args.get('tasks')).split()
@@ -287,7 +284,6 @@ def test():
         a = []
         photo = {}
         if obj == "inf":
-            print("Obj inf")
             for i in tasks:
                 results = list(
                     session.execute(session.query(__all_models.InfTasks).filter(__all_models.InfTasks.number == int(i))))
@@ -298,7 +294,6 @@ def test():
                         photo[k.number] = 'static/img/t' + str(k.number) + '.png'
                 a.append(k)
         else:
-            print("Obj math")
             for i in tasks:
                 results = list(
                     session.execute(session.query(__all_models.MathTasks).filter(__all_models.MathTasks.number == int(i))))
