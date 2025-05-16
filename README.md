@@ -32,3 +32,4 @@
 
 
 Ссылка на сайт: https://start-ege.glitch.me
+# Версия Python = 3.12.10
